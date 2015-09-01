@@ -5,6 +5,10 @@
  */
 package ht.GermainLescouflairSuy.gesBank.session;
 
+import ht.GermainLescouflairSuy.gesBank.entite.Admin;
+import ht.GermainLescouflairSuy.gesBank.entite.Client;
+import ht.GermainLescouflairSuy.gesBank.entite.Compte;
+import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 
@@ -23,9 +27,9 @@ public class sessionBeanAdmin {
         return false;
     }
     
-    public int ajouterCompte(Compte compte){
+    public boolean ajouterCompte(Compte compte){
         
-        return compte;
+        return true;
             
     }
     
@@ -38,7 +42,7 @@ public class sessionBeanAdmin {
         return null;
     }
     
-      public Compte listerCompteByid(long idClient){
+      public Compte listerCompteByid(long idCompte){
         
         return null;
     }

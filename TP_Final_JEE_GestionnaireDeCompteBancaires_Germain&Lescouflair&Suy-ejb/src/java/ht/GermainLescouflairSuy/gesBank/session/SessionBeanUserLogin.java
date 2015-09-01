@@ -5,6 +5,7 @@
  */
 package ht.GermainLescouflairSuy.gesBank.session;
 
+import ht.GermainLescouflairSuy.gesBank.entite.Users;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 
