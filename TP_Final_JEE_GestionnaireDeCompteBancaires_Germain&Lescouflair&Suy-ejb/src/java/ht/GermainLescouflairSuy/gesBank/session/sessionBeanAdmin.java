@@ -15,7 +15,66 @@ import javax.ejb.LocalBean;
 @Stateful
 @LocalBean
 public class sessionBeanAdmin {
+    
+    private Admin admin;
+    
+    public boolean ajouterClient(Client client){
+        
+        return false;
+    }
+    
+    public int ajouterCompte(Compte compte){
+        
+        return compte;
+            
+    }
+    
+    public Client listerClientByid(long idClient){
+        
+        return null;
+    }
+    public List<Client> listerClients(){
+    
+        return null;
+    }
+    
+      public Compte listerCompteByid(long idClient){
+        
+        return null;
+    }
+      
+      public List<Compte> listerCompteClient(Client client){
+    
+        return null;
+    }
+  
+      public List<Client> listerComptes(){
+    
+        return null;
+    }
+      public boolean modifierClient(Client client){
+          
+          return false;
+          
+      }
+      
+       public boolean modifierCompte(Compte compte){
+          
+          return false;
+          
+      }
+       
+          public boolean supprimerClient(Client client){
+          
+          return false;
+          
+      }
+      
+       public boolean supprimerCompte(Compte compte){
+          
+          return false;
+          
+      }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
 }
