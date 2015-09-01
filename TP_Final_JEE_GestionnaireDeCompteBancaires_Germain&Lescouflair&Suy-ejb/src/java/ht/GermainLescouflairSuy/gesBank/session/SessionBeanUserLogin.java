@@ -18,6 +18,13 @@ import javax.ejb.LocalBean;
 public class SessionBeanUserLogin {
    private Users users;
 
+    public SessionBeanUserLogin() {
+    }
+
+    public SessionBeanUserLogin(Users users) {
+        this.users = users;
+    }
+
     
    public boolean loginController(String utilisateur, String password ){
        
