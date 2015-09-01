@@ -11,6 +11,9 @@ import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -21,6 +24,21 @@ import javax.ejb.LocalBean;
 public class sessionBeanAdmin {
     
     private Admin admin;
+    @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
+    private EntityManager em;
+
+     public void persist(Object object) {
+        em.persist(object);
+    }
+     
+    public sessionBeanAdmin() {
+    }
+
+    public sessionBeanAdmin(Admin admin) {
+        this.admin = admin;
+    }
+    
+    
     
     public boolean ajouterClient(Client client){
         
@@ -39,18 +57,20 @@ public class sessionBeanAdmin {
     }
     public List<Client> listerClients(){
     
-        return null;
+       Query query = em.createNamedQuery("Client.findAll");
+       return query.getResultList();
     }
     
       public Compte listerCompteByid(long idCompte){
         
         return null;
     }
-      
+      //?
       public List<Compte> listerCompteClient(Client client){
-    
-        return null;
+       Query query = em.createNamedQuery("Compte.findAll");
+       return query.getResultList();
     }
+     
   
       public List<Client> listerComptes(){
     
@@ -58,27 +78,31 @@ public class sessionBeanAdmin {
     }
       public boolean modifierClient(Client client){
           
-          return false;
+           em.merge(client);
+           return true;
           
       }
       
        public boolean modifierCompte(Compte compte){
           
-          return false;
+           em.merge(compte);
+           return true;
           
       }
        
           public boolean supprimerClient(Client client){
-          
-          return false;
+          em.remove(client);
+          return true;
           
       }
       
        public boolean supprimerCompte(Compte compte){
-          
-          return false;
+          em.remove(compte);
+          return true;
           
       }
+
+   
 
 
 }
