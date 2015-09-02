@@ -8,6 +8,7 @@ package ht.GermainLescouflairSuy.gesBank.session;
 import ht.GermainLescouflairSuy.gesBank.entite.Admin;
 import ht.GermainLescouflairSuy.gesBank.entite.Client;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
@@ -21,7 +22,7 @@ import javax.persistence.Query;
  */
 @Stateful
 @LocalBean
-public class sessionBeanAdmin {
+public class sessionBeanAdmin implements Serializable{
     
     private Admin admin;
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
@@ -42,18 +43,19 @@ public class sessionBeanAdmin {
     
     public boolean ajouterClient(Client client){
         
-        return false;
+        persist(client);
+        return true;
     }
     
     public boolean ajouterCompte(Compte compte){
-        
+        persist(compte);
         return true;
             
     }
     
     public Client listerClientByid(long idClient){
+        return em.find(Client.class, idClient);
         
-        return null;
     }
     public List<Client> listerClients(){
     
@@ -67,15 +69,19 @@ public class sessionBeanAdmin {
     }
       //?
       public List<Compte> listerCompteClient(Client client){
-       Query query = em.createNamedQuery("Compte.findAll");
-       return query.getResultList();
+      // Query query = em.createNamedQuery("Compte.findAll");
+      // Query querye = em.createNamedQuery("Client")
+               
+       return null;//query.getResultList();
     }
      
   
-      public List<Client> listerComptes(){
-    
-        return null;
+      public List<Compte> listerComptes(){
+          
+      Query query = em.createNamedQuery("Client.findAll");
+       return query.getResultList();
     }
+      
       public boolean modifierClient(Client client){
           
            em.merge(client);
