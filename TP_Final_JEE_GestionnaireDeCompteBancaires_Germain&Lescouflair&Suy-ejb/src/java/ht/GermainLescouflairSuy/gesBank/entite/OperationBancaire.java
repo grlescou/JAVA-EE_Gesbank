@@ -6,6 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,20 @@ public class OperationBancaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Date dateOperation;
+    private String description;
+    private double montant;
 
+    public OperationBancaire(){}
+    
+    public OperationBancaire(Long id, Date dateOperation, String description, double montant) {
+        this.id = id;
+        this.dateOperation = dateOperation;
+        this.description = description;
+        this.montant = montant;
+    }
+
+    
     public Long getId() {
         return id;
     }
@@ -29,6 +43,32 @@ public class OperationBancaire implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Date getDateOperation() {
+        return dateOperation;
+    }
+
+    public void setDateOperation(Date dateOperation) {
+        this.dateOperation = dateOperation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
+    }
+    
+    
 
     @Override
     public int hashCode() {

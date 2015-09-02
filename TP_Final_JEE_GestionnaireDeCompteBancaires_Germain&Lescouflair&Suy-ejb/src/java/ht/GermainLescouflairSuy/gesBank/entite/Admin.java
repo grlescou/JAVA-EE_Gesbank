@@ -6,6 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,43 +17,39 @@ import javax.persistence.Id;
  * @author lyzzy
  */
 @Entity
-public class Admin implements Serializable {
+public class Admin extends Users implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    
+    
+    private String nom;
+    private String prenom;
 
-    public Long getId() {
-        return id;
+    public Admin() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Admin)) {
-            return false;
-        }
-        Admin other = (Admin) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "ht.GermainLescouflairSuy.gesBank.entite.Admin[ id=" + id + " ]";
+    public Admin(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
+        super(id,connected,created,email,password,updateAt,utilisateur);
+        this.nom = nom;
+        this.prenom = prenom;
+        
     }
     
+    
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+        
 }
