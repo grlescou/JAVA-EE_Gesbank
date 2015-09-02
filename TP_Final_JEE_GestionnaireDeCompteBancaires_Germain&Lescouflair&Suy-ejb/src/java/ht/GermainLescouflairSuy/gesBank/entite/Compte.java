@@ -6,6 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,20 +21,33 @@ public class Compte implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long numeroCompte;
+    private Date dateCreation;
+    private double solde;
 
-    public Long getId() {
-        return id;
+    public Compte() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Compte(Long numeroCompte, Date dateCreation, double solde) {
+        this.numeroCompte = numeroCompte;
+        this.dateCreation = dateCreation;
+        this.solde = solde;
+    }
+    
+    
+
+    public Long getNumeroCompte() {
+        return numeroCompte;
+    }
+
+    public void setNumeroCompte(Long numeroCompte) {
+        this.numeroCompte = numeroCompte;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (numeroCompte != null ? numeroCompte.hashCode() : 0);
         return hash;
     }
 
@@ -44,15 +58,41 @@ public class Compte implements Serializable {
             return false;
         }
         Compte other = (Compte) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.numeroCompte == null && other.numeroCompte != null) || (this.numeroCompte != null && !this.numeroCompte.equals(other.numeroCompte))) {
             return false;
         }
         return true;
     }
 
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double solde) {
+        this.solde = solde;
+    }
+    
+   public void crediter(double montant){
+    
+        solde+=montant;
+    
+    }
+    public void debiter(double montant){
+    
+        solde-=montant;
+    }
+
     @Override
     public String toString() {
-        return "ht.GermainLescouflairSuy.gesBank.entite.Compte[ id=" + id + " ]";
+        return "ht.GermainLescouflairSuy.gesBank.entite.Compte[ id=" + numeroCompte + " ]";
     }
     
 }
