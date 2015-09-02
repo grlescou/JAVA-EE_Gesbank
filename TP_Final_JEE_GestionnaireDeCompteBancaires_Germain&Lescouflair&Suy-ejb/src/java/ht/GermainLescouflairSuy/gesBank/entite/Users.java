@@ -6,6 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,32 @@ import javax.persistence.Id;
  * @author MyPC
  */
 @Entity
-public class Users implements Serializable {
+public abstract class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private boolean connected;
+    private Date created;
+    private String email;
+    private String password;
+    private Date updateAt;
+    private String utilisateur;
+
+    public Users() {
+    }
+
+    public Users(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur) {
+        this.id = id;
+        this.connected = connected;
+        this.created = created;
+        this.email = email;
+        this.password = password;
+        this.updateAt = updateAt;
+        this.utilisateur = utilisateur;
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -29,6 +51,56 @@ public class Users implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(String utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+    
+    
 
     @Override
     public int hashCode() {

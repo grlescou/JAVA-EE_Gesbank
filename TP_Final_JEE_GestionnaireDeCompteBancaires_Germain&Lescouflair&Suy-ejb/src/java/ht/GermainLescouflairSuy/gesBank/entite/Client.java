@@ -6,6 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,43 +17,46 @@ import javax.persistence.Id;
  * @author lyzzy
  */
 @Entity
-public class Client implements Serializable {
+public class Client extends Users implements Serializable  {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    
+    private String nifCin;
+    private String nom;
+    private String prenom;
+    
+    public Client(){}
+    
+    public Client(String nifCin,String nom,String prenom,Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){
+        super(id,connected,created,email,password,updateAt,utilisateur);
+        this.nifCin=nifCin;
+        this.nom=nom;
+        this.prenom=prenom;
+    }
+    
 
-    public Long getId() {
-        return id;
+    public String getNifCin() {
+        return nifCin;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNifCin(String nifCin) {
+        this.nifCin = nifCin;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getNom() {
+        return nom;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Client)) {
-            return false;
-        }
-        Client other = (Client) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    @Override
-    public String toString() {
-        return "ht.GermainLescouflairSuy.gesBank.entite.Client[ id=" + id + " ]";
+    public String getPrenom() {
+        return prenom;
     }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
     
 }
