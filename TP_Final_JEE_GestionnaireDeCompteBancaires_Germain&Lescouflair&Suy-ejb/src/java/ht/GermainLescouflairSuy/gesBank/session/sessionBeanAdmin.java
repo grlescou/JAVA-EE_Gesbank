@@ -64,8 +64,8 @@ public class sessionBeanAdmin implements Serializable{
     }
     
       public Compte listerCompteByid(long idCompte){
+          return em.find(Compte.class, idCompte);
         
-        return null;
     }
       //?
       public List<Compte> listerCompteClient(Client client){
@@ -78,7 +78,7 @@ public class sessionBeanAdmin implements Serializable{
   
       public List<Compte> listerComptes(){
           
-      Query query = em.createNamedQuery("Client.findAll");
+      Query query = em.createNamedQuery("Compte.findAll");
        return query.getResultList();
     }
       
