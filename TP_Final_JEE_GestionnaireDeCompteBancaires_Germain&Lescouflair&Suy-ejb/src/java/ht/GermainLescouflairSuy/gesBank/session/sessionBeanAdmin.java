@@ -72,7 +72,7 @@ public class sessionBeanAdmin implements Serializable{
       // Query query = em.createNamedQuery("Compte.findAll");
       // Query querye = em.createNamedQuery("Client")
                
-       return null;//query.getResultList();
+       return client.getComptes();
     }
      
   
