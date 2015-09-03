@@ -1,31 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body,html{
+    min-height: 100%;
+    min-width: 100%;
+}
 
 #top {
     position: relative;
-    background-color: #036fab;
+    background-color: #5b87a4;
     color: white;
+    margin: 0px 0px 0px 0px;
+    border: 1px solid #5b87a4;
+    width: 99.2%;
     padding: 5px;
-    margin: 0px 0px 10px 0px;
+    height: 111px;
+    
+}
+
+#top h1{
+    font-weight: bold;
+}
+
+#top-bottom-box{
+    position: absolute;
+    border-top: 1px solid whitesmoke;
+    width: 98.2%;
+    height: 30px;
+    box-shadow: #808080 1px;
+    bottom: 1px;
+}
+#user-box{
+    display: inline-block;
+    width:  75%;
+}
+
+#user-log{
+   position: absolute;
+   display: inline-block;
+   width:  25%;
+   
+   height: 20px;
+   padding:5px;  
+   border: 0px solid red;
+   
 }
 
 #bottom {
     position: relative;
-    background-color: #c2dfef;
+    background-color: #5b87a4;
+    border-top: 5px solid #808080;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    width: 99.2%;
+    height: 40px;
+    
+}
+#container{
+    min-height: 30%;
 }
 
 #left {
     float: left;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
+    background-color: scrollbar;
+    padding-bottom: 1%;
+    width: 16%;
+    height: 70%;
+    margin: 0 0 0px 0px;
+    border: 2px solid #808080;
 }
 
-#right {
-    float: right;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
+#menu-title{
+    background-color: #5b87a4;
+    color: white;
+    text-align: center;
+    padding: 2px;
+    
+}
+
+.menu-Body-width-full{
+    width: 95% !important;
+    
+}
+
+.menu-Headers-text-color{
+    font-size: 15px !important;
+    
+}
+
+
+#left .paddin-content{
+   padding: 5px; 
 }
 
 .center_content {
@@ -41,9 +108,14 @@
 }
 
 .right_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 170px 0px 170px;
+    
+    background-color: scrollbar;
+    padding: 0.5%;
+    margin-top: 0px ;
+    margin-left: 16.2%;
+    height: 70%;
+    width: 82.3%;
+    border: 2px solid #808080;
 }
 
 #top a:link, #top a:visited {
