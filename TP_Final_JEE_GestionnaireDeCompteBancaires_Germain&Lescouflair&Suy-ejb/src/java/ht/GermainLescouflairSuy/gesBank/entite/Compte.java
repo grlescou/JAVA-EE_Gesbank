@@ -7,10 +7,15 @@ package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -26,7 +31,12 @@ public class Compte implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateCreation;
     private double solde;
-
+    @ManyToOne
+    private Client client;
+    
+    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER,mappedBy="Compte")
+    private List<OperationBancaire> Operations;
+    
     public Compte() {
     }
 
@@ -81,12 +91,13 @@ public class Compte implements Serializable {
     public void setSolde(double solde) {
         this.solde = solde;
     }
-    
+   
    public void crediter(double montant){
     
         solde+=montant;
     
     }
+   
     public void debiter(double montant){
     
         solde-=montant;

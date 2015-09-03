@@ -42,5 +42,8 @@ public class CompteEpargne extends Compte implements Serializable {
         this.taux = taux;
     }
 
-    public void ajouterInterets(){}
+    public void ajouterInterets(){
+        double newSold = this.getSolde() + ((this.getSolde()*this.getTaux())/100);
+        this.setSolde(newSold);
+    }
 }
