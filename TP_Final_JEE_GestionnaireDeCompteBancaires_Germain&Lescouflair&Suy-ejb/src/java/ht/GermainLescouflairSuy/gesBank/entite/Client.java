@@ -66,5 +66,13 @@ public class Client extends Users implements Serializable  {
         this.prenom = prenom;
     }
 
+    public List<Compte> getComptes() {
+        return comptes;
+    }
+
+    public void setComptes(List<Compte> comptes) {
+        this.comptes = comptes;
+    }
+
     
 }

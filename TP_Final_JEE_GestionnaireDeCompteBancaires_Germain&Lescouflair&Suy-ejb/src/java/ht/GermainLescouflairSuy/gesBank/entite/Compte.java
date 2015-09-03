@@ -56,6 +56,23 @@ public class Compte implements Serializable {
         this.numeroCompte = numeroCompte;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OperationBancaire> getOperations() {
+        return Operations;
+    }
+
+    public void setOperations(List<OperationBancaire> Operations) {
+        this.Operations = Operations;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

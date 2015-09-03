@@ -77,7 +77,14 @@ public class OperationBancaire implements Serializable {
     public void setMontant(double montant) {
         this.montant = montant;
     }
-    
+
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
+    }
     
 
     @Override
