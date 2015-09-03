@@ -11,7 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+
+
+
 
 /**
  *
@@ -27,6 +32,9 @@ public class OperationBancaire implements Serializable {
     private Date dateOperation;
     private String description;
     private double montant;
+    
+    @ManyToOne
+    private Compte compte;
 
     public OperationBancaire(){}
     
