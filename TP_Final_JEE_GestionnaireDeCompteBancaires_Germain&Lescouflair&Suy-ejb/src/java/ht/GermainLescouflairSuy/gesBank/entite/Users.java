@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -23,9 +24,11 @@ public abstract class Users implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private boolean connected;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date created;
     private String email;
     private String password;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
     private String utilisateur;
 
