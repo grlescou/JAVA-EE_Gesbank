@@ -13,8 +13,8 @@ and open the template in the editor.
 #login-container {
     margin: auto;
     margin-top: 100px;
-    width: 450px;
-    height: 250px;
+    width: 550px;
+    height: 350px;
    
 }
 
@@ -23,7 +23,7 @@ and open the template in the editor.
 #login-body{
    border: 3px solid #5b87a4;
    color: blue;   
-   height: 200px;
+   height: 300px;
 }
 
 .login-size{
