@@ -48,7 +48,8 @@ public class Client extends Users implements Serializable  {
     }
     
    public Client(String nifCin,String nom,String prenom,boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){
-        super(connected,created,email,password,updateAt,utilisateur);
+       super(connected,created,email,password,updateAt,utilisateur);
+
         this.nifCin=nifCin;
         this.nom=nom;
         this.prenom=prenom;

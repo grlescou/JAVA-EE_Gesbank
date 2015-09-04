@@ -57,6 +57,8 @@ public class Compte implements Serializable {
     }
     
     public Compte(Date dateCreation, double solde) {
+        OperationBancaire op = new OperationBancaire("Creation d'un nouvel compte", dateCreation, solde);
+        Operations.add(op);
         this.dateCreation = dateCreation;
         this.solde = solde;
     }

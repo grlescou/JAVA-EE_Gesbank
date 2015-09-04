@@ -40,9 +40,28 @@ public class OperationBancaire implements Serializable {
     
     public OperationBancaire(Long id, Date dateOperation, String description, double montant) {
         this.id = id;
-        this.dateOperation = dateOperation;
+        dateOperation = new Date();
         this.description = description;
         this.montant = montant;
+    }
+    
+    /**
+     *
+     * @param description
+     * @param montant
+     */
+
+    /**
+     *
+     * @param Description
+     * @param description
+     * @param montant
+     */
+    public OperationBancaire(String Description, Date dateOperation, double montant){
+        this.description = description;
+        dateOperation = new Date();
+        this.montant = montant;
+
     }
 
     

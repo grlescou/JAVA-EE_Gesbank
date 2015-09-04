@@ -8,6 +8,7 @@ package ht.GermainLescouflairSuy.gesBank.session;
 import ht.GermainLescouflairSuy.gesBank.entite.Admin;
 import ht.GermainLescouflairSuy.gesBank.entite.Client;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
+import ht.GermainLescouflairSuy.gesBank.entite.CompteCourant;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class sessionBeanAdmin implements Serializable{
+public class SessionBeanAdmin implements Serializable{
     
     
     private Admin admin;
@@ -35,18 +36,16 @@ public class sessionBeanAdmin implements Serializable{
         em.persist(object);
     }
      
-    public sessionBeanAdmin() {
+    public SessionBeanAdmin() {
+       
     }
 
-    public sessionBeanAdmin(Admin admin) {
-        this.admin = admin;
-    }
-    
+  
     
     
     public boolean ajouterClient(Client client){
         
-        persist(client);
+        em.persist(client);
         return true;
     }
     
@@ -63,6 +62,12 @@ public class sessionBeanAdmin implements Serializable{
         persist(compte);
         return true;
             
+    }
+    
+    public void ajouterCompteTest(){
+         ajouterCompte(new CompteCourant(12.5, champDate(), 1222.78) );
+         ajouterCompte(new CompteCourant(9098.5, champDate(), 129802.78) );
+         ajouterCompte(new CompteCourant(12986.5, champDate(), 12922.78) );
     }
     
     public Client listerClientByid(long idClient){
