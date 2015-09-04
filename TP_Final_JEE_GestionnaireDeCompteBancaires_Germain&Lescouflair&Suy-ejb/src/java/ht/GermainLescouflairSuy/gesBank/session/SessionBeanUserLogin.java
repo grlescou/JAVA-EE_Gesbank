@@ -6,6 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.session;
 
 import ht.GermainLescouflairSuy.gesBank.entite.Users;
+import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 
@@ -15,7 +16,7 @@ import javax.ejb.LocalBean;
  */
 @Stateless
 @LocalBean
-public class SessionBeanUserLogin {
+public class SessionBeanUserLogin  implements Serializable{
    private Users users;
 
     public SessionBeanUserLogin() {
@@ -30,4 +31,5 @@ public class SessionBeanUserLogin {
        
        return false;
    }
+   
 }

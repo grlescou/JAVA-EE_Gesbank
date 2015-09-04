@@ -31,6 +31,7 @@ public abstract class Users implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
     private String utilisateur;
+    
 
     public Users() {
     }

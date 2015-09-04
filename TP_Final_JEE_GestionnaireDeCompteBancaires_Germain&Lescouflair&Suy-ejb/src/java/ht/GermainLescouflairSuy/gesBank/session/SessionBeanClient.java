@@ -8,6 +8,7 @@ package ht.GermainLescouflairSuy.gesBank.session;
 import ht.GermainLescouflairSuy.gesBank.entite.Client;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -21,7 +22,7 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class SessionBeanClient {
+public class SessionBeanClient implements Serializable {
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
     private EntityManager em;
 
@@ -41,25 +42,38 @@ public class SessionBeanClient {
     }
 
     public boolean crediterCompte(double montant, Compte compte) {
-        return false;
+       compte.crediter(montant);
+       em.merge(compte);
+        return true;
     }
     
     public boolean debiterCompte(double montant, Compte compte) {
-        return false;
+        compte.debiter(montant);
+        em.merge(compte);
+        return true;
     }
     
-         public List<OperationBancaire> listeOperationCompte(Client client){
+         public List<OperationBancaire> listeOperationCompte(Compte compte){
              Query query =em.createNamedQuery("OperationBancaire.findAll");
-        return null;
+             return query.getResultList();
     }
-         
-     public Compte listerCompteByid(long idCompte, Client client){
+      
+             
+     public Compte listerCompteByid(long idCompte){
         
-        return null;
+        return  em.find(Compte.class, idCompte);
     }
+     
+     public List<Compte> listerComptes(Compte compte){
+         Query query = em.createNamedQuery("Compte.findAll");
+         return query.getResultList();
+     }
 
     public Boolean Transferer(double montant, Compte compteSource, Compte compteDestnation) {
-        return null;
+       compteSource.debiter(montant);
+       compteDestnation.crediter(montant);
+       
+        return true;
     }
 
    
