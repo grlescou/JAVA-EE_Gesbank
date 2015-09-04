@@ -42,7 +42,7 @@ public class LoginMBean {
     private String user;
     private String password ;
     private boolean connected = false;
-    private String Role="Admin" ;
+    private String Role="Client" ;
     private String PageRole;
     //ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
     FacesContext fc = FacesContext.getCurrentInstance();
@@ -93,7 +93,8 @@ public class LoginMBean {
     
     public void deconnexion(ActionEvent actionEvent){
         this.connected = false;
-        nav.performNavigation("../login.xhtml?faces-redirect=true");
+       //addMessage("Deconecter");
+        nav.performNavigation("/faces/login.xhtml?faces-redirect=true");
     }
 
     public String getRole() {
@@ -121,19 +122,19 @@ public class LoginMBean {
     }
     
     
-    public String checkConnection(){
+    public void checkConnection(){
         //Client client =  null;
-         connected = (user.equals("grl") && password.equals("1234"));
+        connected = (user.equals("grl") && password.equals("1234"));
         Role="Client";
          if(connected){
            
                
-                return "client/MesComptes.xhtml?faces-redirect=true";
-           
+            //    return "client/MesComptes.xhtml?faces-redirect=true";
+            nav.performNavigation("/faces/client/MesComptes.xhtml?faces-redirect=true");
             
         }
          else{
-              return "login.xhtml?faces-redirect=true";
+               nav.performNavigation("/faces/login.xhtml?faces-redirect=true");
          }
         
         
@@ -144,18 +145,18 @@ public class LoginMBean {
     public void isUserConnected(ComponentSystemEvent event){
         
        PageRole = (String)event.getComponent().getAttributes().get("PageRole");
-    
+        if(this.Role.equals(PageRole)== false)
+        {
+            nav.performNavigation("/faces/login.xhtml?faces-redirect=true");
+        }
+       
         if(!connected){
          
-         
-         nav.performNavigation("login.xhtml?faces-redirect=true");
+        nav.performNavigation("/faces/login.xhtml?faces-redirect=true");
          
         }
         else{
-            if(this.Role.equals(PageRole)== false)
-            {
-                nav.performNavigation("login.xhtml?faces-redirect=true");
-            }
+            
            nav.performNavigation("#");
         }
     }
