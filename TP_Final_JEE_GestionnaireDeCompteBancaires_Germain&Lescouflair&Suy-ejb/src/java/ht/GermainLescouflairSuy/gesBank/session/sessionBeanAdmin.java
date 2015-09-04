@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -20,9 +21,10 @@ import javax.persistence.Query;
  *
  * @author MyPC
  */
-@Stateful
+@Stateless
 @LocalBean
 public class sessionBeanAdmin implements Serializable{
+    
     
     private Admin admin;
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")

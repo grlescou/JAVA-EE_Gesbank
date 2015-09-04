@@ -16,8 +16,7 @@ body,html{
     border: 1px solid #5b87a4;
     width: 99.2%;
     padding: 5px;
-    height: 111px;
-    
+    height: 111px; 
 }
 
 #top h1{
@@ -56,6 +55,7 @@ body,html{
     margin: 0px 0px 0px 0px;
     width: 99.2%;
     height: 40px;
+    color: white;
     
 }
 #container{
@@ -77,7 +77,7 @@ body,html{
     color: white;
     text-align: center;
     padding: 2px;
-    
+   
 }
 
 .menu-Body-width-full{
@@ -117,6 +117,17 @@ body,html{
     width: 82.3%;
     border: 2px solid #808080;
 }
+
+#content-title{
+    height: 50px;
+    color: blue;
+    border-bottom: 3px solid grey;
+    font-weight: bold;
+    font-size: 25px;
+     margin-bottom: 15px;
+}
+
+
 
 #top a:link, #top a:visited {
   color: white;

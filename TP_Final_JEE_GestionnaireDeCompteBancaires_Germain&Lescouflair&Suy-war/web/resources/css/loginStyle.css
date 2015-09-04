@@ -12,23 +12,36 @@ and open the template in the editor.
 
 #login-container {
     margin: auto;
-    width: 40%;
-    height: 20%;
-    border: 1px solid red;
-    color: blue;
+    margin-top: 100px;
+    width: 450px;
+    height: 250px;
+   
 }
 
 
 
 #login-body{
-    
+   border: 3px solid #5b87a4;
+   color: blue;   
+   height: 200px;
 }
+
+.login-size{
+     height: 100px !important;
+}
+
 
 
 #login-footer{
-    
+   color: blue; 
+   text-align: center;
 }
 
 #login-header{
-    color:red;
+   background-color: #5b87a4;
+    color: white;
+    height: 30px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
 }
