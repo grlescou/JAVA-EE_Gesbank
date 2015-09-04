@@ -8,7 +8,8 @@
    
       <f:metadata>
          <f:event listener="#{loginMBean.isUserConnected}" type="preRenderView" />
-         <f:attribute name="PageRole" value="Client" />        
+         
+           <ui:insert name="meta-attr"></ui:insert>
       </f:metadata>
 
     <h:head>
