@@ -9,6 +9,7 @@ import ht.GermainLescouflairSuy.gesBank.entite.Admin;
 import ht.GermainLescouflairSuy.gesBank.entite.Client;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
@@ -49,6 +50,15 @@ public class sessionBeanAdmin implements Serializable{
         return true;
     }
     
+     private Date champDate(){
+        Date mydate = new Date();
+        return mydate;
+    }
+    
+    public void ajouterClientTest(){
+    ajouterClient(new Client("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert") );
+    }
+
     public boolean ajouterCompte(Compte compte){
         persist(compte);
         return true;
