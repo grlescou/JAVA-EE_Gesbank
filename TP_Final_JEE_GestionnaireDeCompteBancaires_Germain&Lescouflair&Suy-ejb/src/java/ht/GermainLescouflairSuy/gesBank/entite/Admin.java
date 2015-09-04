@@ -7,16 +7,21 @@ package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author lyzzy
  */
 @Entity
+
+@DiscriminatorValue("Admin")
+
+@NamedQueries({
+    @NamedQuery(name = "Admin.findAll", query = "SELECT adm FROM Admin adm")})
 public class Admin extends Users implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -34,7 +39,12 @@ public class Admin extends Users implements Serializable {
         
     }
     
-    
+     public Admin(boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
+        super(connected,created,email,password,updateAt,utilisateur);
+        this.nom = nom;
+        this.prenom = prenom;
+        
+    }
 
     public String getNom() {
         return nom;

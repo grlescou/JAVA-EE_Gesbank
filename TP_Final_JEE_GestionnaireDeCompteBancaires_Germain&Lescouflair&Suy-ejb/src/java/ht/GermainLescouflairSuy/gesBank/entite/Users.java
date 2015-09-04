@@ -7,10 +7,17 @@ package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 
 /**
@@ -18,6 +25,13 @@ import javax.persistence.Temporal;
  * @author MyPC
  */
 @Entity
+
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="ROLE",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("Users")
+
+@NamedQueries({
+    @NamedQuery(name = "Users.findAll", query = "SELECT usr FROM Users usr")})
 public abstract class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,6 +60,15 @@ public abstract class Users implements Serializable {
         this.utilisateur = utilisateur;
     }
     
+    
+    public Users(boolean connected, Date created, String email, String password, Date updateAt, String utilisateur) {
+        this.connected = connected;
+        this.created = created;
+        this.email = email;
+        this.password = password;
+        this.updateAt = updateAt;
+        this.utilisateur = utilisateur;
+    }
     
 
     public Long getId() {

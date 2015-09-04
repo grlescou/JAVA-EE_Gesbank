@@ -1,20 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -23,6 +26,13 @@ import javax.persistence.Temporal;
  * @author lyzzy
  */
 @Entity
+
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TypeCompte",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("Compte")
+
+@NamedQueries({
+    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")})
 public class Compte implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,6 +52,11 @@ public class Compte implements Serializable {
 
     public Compte(Long numeroCompte, Date dateCreation, double solde) {
         this.numeroCompte = numeroCompte;
+        this.dateCreation = dateCreation;
+        this.solde = solde;
+    }
+    
+    public Compte(Date dateCreation, double solde) {
         this.dateCreation = dateCreation;
         this.solde = solde;
     }
@@ -126,3 +141,4 @@ public class Compte implements Serializable {
     }
     
 }
+

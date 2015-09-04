@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +10,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,6 +22,11 @@ import javax.persistence.OneToMany;
  * @author lyzzy
  */
 @Entity
+
+@DiscriminatorValue("Client")
+
+@NamedQueries({
+    @NamedQuery(name = "Client.findAll", query = "SELECT cl FROM Client cl")})
 public class Client extends Users implements Serializable  {
     private static final long serialVersionUID = 1L;
     
@@ -28,7 +34,7 @@ public class Client extends Users implements Serializable  {
     private String nom;
     private String prenom;
     
-    
+   
     @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER, mappedBy="Client")
     private List<Compte> comptes;
     
@@ -41,7 +47,13 @@ public class Client extends Users implements Serializable  {
         this.prenom=prenom;
     }
     
-
+   public Client(String nifCin,String nom,String prenom,boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){
+        super(connected,created,email,password,updateAt,utilisateur);
+        this.nifCin=nifCin;
+        this.nom=nom;
+        this.prenom=prenom;
+    
+   }
     public String getNifCin() {
         return nifCin;
     }
@@ -74,5 +86,6 @@ public class Client extends Users implements Serializable  {
         this.comptes = comptes;
     }
 
-    
+   
+   
 }
