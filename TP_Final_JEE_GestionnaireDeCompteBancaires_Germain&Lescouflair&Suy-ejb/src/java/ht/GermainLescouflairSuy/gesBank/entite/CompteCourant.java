@@ -21,7 +21,7 @@ import javax.persistence.NamedQuery;
 @DiscriminatorValue("CompteCourant")
 
 @NamedQueries({
-    @NamedQuery(name = "CompteCourant.findAll", query = "SELECT cc FROM CompteCorant cc")})
+    @NamedQuery(name = "CompteCourant.findAll", query = "SELECT cc FROM CompteCourant cc")})
 public class CompteCourant extends Compte implements Serializable {
     private static final long serialVersionUID = 1L;
    

@@ -21,7 +21,7 @@ import javax.persistence.NamedQuery;
 @DiscriminatorValue("Admin")
 
 @NamedQueries({
-    @NamedQuery(name = "Admin.findAll", query = "SELECT adm FROM Administrateur adm")})
+    @NamedQuery(name = "Admin.findAll", query = "SELECT adm FROM Admin adm")})
 public class Admin extends Users implements Serializable {
     private static final long serialVersionUID = 1L;
     
