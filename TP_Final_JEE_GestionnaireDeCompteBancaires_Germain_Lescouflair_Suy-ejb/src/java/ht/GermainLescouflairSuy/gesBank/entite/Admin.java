@@ -22,9 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lyzzy
  */
 @Entity
-
 @DiscriminatorValue("Admin")
-
 @NamedQueries({
     @NamedQuery(name = "Admin.findAll", query = "SELECT adm FROM Admin adm")})
 @XmlRootElement
