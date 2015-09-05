@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../templates/default_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" >
+
+    <ui:define name="meta-attr">
+        <f:attribute name="PageRole" value="Admin" />
+    </ui:define>
+    
+    <ui:define name="complementTitreEtH1">
+        Liste Comptes
+    </ui:define>
+
+    <ui:define name="content-title">
+        Liste des comptes
+    </ui:define>
+
+    <ui:define name="content">
+                
+        
+        <h:form>
+            <f:view>
+
+
+                <h:form>
+                    
+                    <p:dataTable  id="radioDT" value="#{compteBancaireBeans.comptes}" var="item"  widgetVar="compteTb"
+                     paginator="true" rows="10" rowsPerPageTemplate="10,20" sortMode="multiple" emptyMessage="Aucun Compte Bancaire Trouve..." 
+                    filteredValue="#{compteBancaireBeans.compteBancaireFilter}"
+                    selection="#{compteBancaireBeans.selectedcompteBancaire}" rowKey="#{item.id}">
+                        <f:facet name="header">  
+                    <p:outputPanel>  
+                        <h:outputText value="Rechercher : " />  
+                        <p:inputText id="globalFilter" onkeyup="PF('compteTb').filter();" style="width:150px" />  
+                    </p:outputPanel>  
+                  </f:facet> 
+                        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                        <p:column headerText="Id" filterBy="#{item.id}" sortBy="#{item.id}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column headerText="Nom" filterBy="#{item.nom}" sortBy="#{item.nom}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{compteBancaireBeans.filterByMontant}">
+                            <f:facet name="header">
+                                <h:outputText value="Solde"/>
+                            </f:facet>
+                            <h:outputText value="#{item.solde}">
+                              <f:convertNumber currencySymbol="HTG " type="currency"/>
+                           </h:outputText>
+                        </p:column>
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.id)}" value="Details"/>
+                             <h:link class="lien" outcome="#{compteBancaireBeans.getActiontStringModif(item.id)}" value="Modifier"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.id)}" value="Depots/Retrait"/>
+                            
+
+                        </p:column>
+                        <f:facet name="footer">
+                           <p:commandButton class="lien" value="supprimer"
+                                 oncomplete="PF('DelDialog').show()"
+                                 process="radioDT" update=":DelDetail"
+                                 title="Supprimer"
+                                 image="/resources/img/DeleteRed.png"/> 
+                        </f:facet>
+                    </p:dataTable>
+                </h:form>
+            </f:view>
+
+        </h:form>
+        
+        
+        
+        <p:dialog header="Delete Compte" widgetVar="DelDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="DelDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty compteBancaireBeans.selectedcompteBancaire}" columnClasses="label,value">
+               <f:facet name="header">
+                   <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
+                </f:facet>
+                
+                <h:outputText value="Id:" />
+                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.id}" />
+ 
+                <h:outputText value="Nom:" />
+                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.nom}" />
+ 
+                <h:outputText value="Solde:" />
+                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.solde}" />
+                
+               <p:commandButton class="lien" 
+                                type="submit"
+                                 action="#{compteBancaireBeans.delete(compteBancaireBeans.selectedcompteBancaire)}"
+                                 value="supprimer"
+                                 title="Supprimer"
+                                 image="/resources/img/DeleteRed.png"
+                                 oncomplete="PF('DelDialog').hide(); PF('compteTb').filter();"/>
+
+               
+               
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+ 
+ 
+
+        
+        
+        
+        
+        
+        
+    </ui:define>
+
+</ui:composition>

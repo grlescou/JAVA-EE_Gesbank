@@ -3,16 +3,16 @@
     <type>org.netbeans.modules.j2ee.earproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2ee-earproject/2">
-            <name>TP_Final_JEE_GestionnaireDeCompteBancaires_Germain&amp;Lescouflair&amp;Suy</name>
+            <name>TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
-                    <file>${reference.TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-war.dist-ear}</file>
+                    <file>${reference.TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejb.dist-ear}</file>
+                    <file>${reference.TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-war.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>
