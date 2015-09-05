@@ -74,9 +74,7 @@ public class Compte implements Serializable {
         this.solde = solde;
     }
 
-    Compte(SingularAttribute<Compte, Long> numeroCompte, SingularAttribute<Compte, Date> dateCreation, SingularAttribute<Compte, Double> solde) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     public String getTypeCompte() {
         return typeCompte;

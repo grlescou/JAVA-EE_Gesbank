@@ -50,6 +50,7 @@ public class Client extends Users implements Serializable  {
     private String nom;
     @Column(nullable=false,length=50)
     private String prenom;
+   
     
    
     @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER, mappedBy="Client")
@@ -63,7 +64,8 @@ public class Client extends Users implements Serializable  {
         this.nifCin=nifCin;
         this.nom=nom;
         this.prenom=prenom;
-        this.comptes.add(new Compte(numeroCompte,dateCreation,solde));
+        
+        
     }
     
    public Client(String nifCin,String nom,String prenom,boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){
