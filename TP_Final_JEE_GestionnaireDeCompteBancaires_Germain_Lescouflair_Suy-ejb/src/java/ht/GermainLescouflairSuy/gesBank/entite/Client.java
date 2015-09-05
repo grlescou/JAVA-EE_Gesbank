@@ -6,9 +6,6 @@
  */
 package ht.GermainLescouflairSuy.gesBank.entite;
 
-import static ht.GermainLescouflairSuy.gesBank.entite.Compte_.dateCreation;
-import static ht.GermainLescouflairSuy.gesBank.entite.Compte_.numeroCompte;
-import static ht.GermainLescouflairSuy.gesBank.entite.Compte_.solde;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,13 +74,15 @@ public class Client extends Users implements Serializable  {
     
    }
   
-     public Long getId() {
+       public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;
     }
+    
     public String getNifCin() {
         return nifCin;
     }
@@ -91,6 +90,7 @@ public class Client extends Users implements Serializable  {
     public void setNifCin(String nifCin) {
         this.nifCin = nifCin;
     }
+    
 
     public String getNom() {
         return nom;
@@ -123,6 +123,7 @@ public class Client extends Users implements Serializable  {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+    
 
     @Override
     public boolean equals(Object object) {
