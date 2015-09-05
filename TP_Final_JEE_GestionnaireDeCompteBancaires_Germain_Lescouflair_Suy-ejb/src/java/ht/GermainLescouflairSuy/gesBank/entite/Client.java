@@ -73,6 +73,7 @@ public class Client extends Users implements Serializable  {
         this.prenom=prenom;
     
    }
+
   
        public Long getId() {
         return id;
@@ -83,6 +84,7 @@ public class Client extends Users implements Serializable  {
         this.id = id;
     }
     
+
     public String getNifCin() {
         return nifCin;
     }
