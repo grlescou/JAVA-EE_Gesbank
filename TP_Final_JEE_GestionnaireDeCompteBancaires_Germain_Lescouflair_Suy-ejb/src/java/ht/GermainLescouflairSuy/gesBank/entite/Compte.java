@@ -1,11 +1,14 @@
 
 package ht.GermainLescouflairSuy.gesBank.entite;
 
+
+import ht.GermainLescouflairSuy.gesBank.entite.enumeration.TypeOperation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -21,6 +24,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -34,6 +39,7 @@ import javax.persistence.Temporal;
 
 @NamedQueries({
     @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")})
+@XmlRootElement
 public class Compte implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,9 +47,13 @@ public class Compte implements Serializable {
     private Long numeroCompte;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateCreation;
+     @Column(nullable=false,length=30)
     private double solde;
     @ManyToOne
     private Client client;
+    @Column(name="TypeCompte")
+    private String typeCompte;
+   
     
     @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER,mappedBy="Compte")
     private List<OperationBancaire> Operations = new ArrayList<>();
@@ -55,13 +65,26 @@ public class Compte implements Serializable {
         this.numeroCompte = numeroCompte;
         this.dateCreation = dateCreation;
         this.solde = solde;
+        Date dateOperation = new Date();
+        this.Operations.add(new OperationBancaire (dateOperation,TypeOperation.CREATION.getType(),solde));
     }
     
     public Compte(Date dateCreation, double solde) {
         this.dateCreation = dateCreation;
         this.solde = solde;
     }
-    
+
+    Compte(SingularAttribute<Compte, Long> numeroCompte, SingularAttribute<Compte, Date> dateCreation, SingularAttribute<Compte, Double> solde) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getTypeCompte() {
+        return typeCompte;
+    }
+
+    public void setTypeCompte(String typeCompte) {
+        this.typeCompte = typeCompte;
+    }
     
 
     public Long getNumeroCompte() {

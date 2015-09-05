@@ -6,9 +6,7 @@
  */
 package ht.GermainLescouflairSuy.gesBank.entite;
 
-import static ht.GermainLescouflairSuy.gesBank.entite.Compte_.dateCreation;
-import static ht.GermainLescouflairSuy.gesBank.entite.Compte_.numeroCompte;
-import static ht.GermainLescouflairSuy.gesBank.entite.Compte_.solde;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +61,7 @@ public class Client extends Users implements Serializable  {
         this.nifCin=nifCin;
         this.nom=nom;
         this.prenom=prenom;
-        this.comptes.add(new Compte(numeroCompte,dateCreation,solde));
+ 
     }
     
    public Client(String nifCin,String nom,String prenom,boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){

@@ -7,6 +7,7 @@ package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -19,6 +20,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -32,19 +34,24 @@ import javax.persistence.Temporal;
 
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT usr FROM Users usr")})
+@XmlRootElement
 public abstract class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+     Long id;
     private boolean connected;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date created;
+     @Column(nullable=false,length=20)
     private String email;
+    @Column(nullable=false,length=30)
     private String password;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
     private String utilisateur;
+    @Column(name="ROLE")
+    private String ROLE ;
     
 
     public Users() {
@@ -79,6 +86,16 @@ public abstract class Users implements Serializable {
         this.id = id;
     }
 
+    public String getROLE() {
+        return ROLE;
+    }
+
+    public void setROLE(String ROLE) {
+        this.ROLE = ROLE;
+    }
+    
+    
+    
     public boolean isConnected() {
         return connected;
     }
