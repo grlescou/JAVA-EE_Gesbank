@@ -8,6 +8,8 @@ package ht.GermainLescouflairSuy.gesBank.session;
 import ht.GermainLescouflairSuy.gesBank.entite.Admin;
 import ht.GermainLescouflairSuy.gesBank.entite.Client;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
+import ht.GermainLescouflairSuy.gesBank.entite.CompteCourant;
+import ht.GermainLescouflairSuy.gesBank.entite.CompteEpargne;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +57,14 @@ public class SessionBeanAdmin implements Serializable{
     }
     
     public void ajouterClientTest(){
-    ajouterClient(new Client("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert") );
+        Client c1 = new Client("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert");
+        CompteCourant cpt1 = new CompteCourant (5000,champDate(),10000);
+        CompteCourant cpt2 = new CompteCourant (15000,champDate(),100000);
+        CompteEpargne cptE1 = new CompteEpargne (1000L,champDate(),100000);
+        c1.getComptes().add(cpt1);
+        c1.getComptes().add(cpt2);
+        c1.getComptes().add(cptE1);
+        ajouterClient(c1 );
     }
 
     public boolean ajouterCompte(Compte compte){

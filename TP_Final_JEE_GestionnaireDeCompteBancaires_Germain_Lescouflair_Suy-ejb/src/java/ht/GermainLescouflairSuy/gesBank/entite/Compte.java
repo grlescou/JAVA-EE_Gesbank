@@ -2,6 +2,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -45,7 +46,7 @@ public class Compte implements Serializable {
     private Client client;
     
     @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER,mappedBy="Compte")
-    private List<OperationBancaire> Operations;
+    private List<OperationBancaire> Operations = new ArrayList<>();
     
     public Compte() {
     }

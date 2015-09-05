@@ -127,7 +127,9 @@ public abstract class Users implements Serializable {
         this.utilisateur = utilisateur;
     }
     
-    
+    public String getRole(){
+        return DiscriminatorValue.class.getName();
+    }
 
     @Override
     public int hashCode() {

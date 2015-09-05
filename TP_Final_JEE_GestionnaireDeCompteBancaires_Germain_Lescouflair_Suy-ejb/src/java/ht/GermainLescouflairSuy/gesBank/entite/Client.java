@@ -7,6 +7,7 @@
 package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -36,7 +37,7 @@ public class Client extends Users implements Serializable  {
     
    
     @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER, mappedBy="Client")
-    private List<Compte> comptes;
+    private List<Compte> comptes =new ArrayList<>();
     
     public Client(){}
     
@@ -54,6 +55,7 @@ public class Client extends Users implements Serializable  {
         this.prenom=prenom;
     
    }
+   
     public String getNifCin() {
         return nifCin;
     }
