@@ -7,13 +7,15 @@ package ht.GermainLescouflairSuy.gesBank.entite;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 
@@ -23,6 +25,7 @@ import javax.persistence.Temporal;
  * @author lyzzy
  */
 @Entity
+@XmlRootElement
 public class OperationBancaire implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -30,7 +33,9 @@ public class OperationBancaire implements Serializable {
     private Long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateOperation;
+     @Column(nullable=false,length=100)
     private String description;
+      @Column(nullable=false)
     private double montant;
     
     @ManyToOne
@@ -40,12 +45,37 @@ public class OperationBancaire implements Serializable {
     
     public OperationBancaire(Long id, Date dateOperation, String description, double montant) {
         this.id = id;
+        dateOperation = new Date();
+        this.description = description;
+        this.montant = montant;
+    }
+    
+    /**
+     *
+     * @param description
+     * @param montant
+     */
+
+    /**
+     *
+     * @param Description
+     * @param description
+     * @param montant
+     */
+    public OperationBancaire(String Description, Date dateOperation, double montant){
+        this.description = description;
+        dateOperation = new Date();
+        this.montant = montant;
+
+    }
+
+    public OperationBancaire(Date dateOperation, String description, double montant) {
         this.dateOperation = dateOperation;
         this.description = description;
         this.montant = montant;
     }
 
-    
+   
     public Long getId() {
         return id;
     }
