@@ -24,3 +24,5 @@ public enum TypeOperation {
         return this.type;
     }
 }
+
+

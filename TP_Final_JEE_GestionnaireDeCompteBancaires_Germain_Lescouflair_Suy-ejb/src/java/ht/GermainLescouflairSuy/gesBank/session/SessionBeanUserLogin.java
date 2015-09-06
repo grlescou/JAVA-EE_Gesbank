@@ -5,7 +5,7 @@
  */
 package ht.GermainLescouflairSuy.gesBank.session;
 
-import ht.GermainLescouflairSuy.gesBank.entite.Users;
+import ht.GermainLescouflairSuy.gesBank.entite.Utilisateur;
 import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -19,14 +19,14 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 public class SessionBeanUserLogin  implements Serializable{
-   private Users users;
+   private Utilisateur users;
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
     private EntityManager em;
    
     public SessionBeanUserLogin() {
     }
 
-    public SessionBeanUserLogin(Users users) {
+    public SessionBeanUserLogin(Utilisateur users) {
         this.users = users;
     }
 
@@ -36,6 +36,7 @@ public class SessionBeanUserLogin  implements Serializable{
        return false;
    }
 
+   
     public void persist(Object object) {
         em.persist(object);
     }

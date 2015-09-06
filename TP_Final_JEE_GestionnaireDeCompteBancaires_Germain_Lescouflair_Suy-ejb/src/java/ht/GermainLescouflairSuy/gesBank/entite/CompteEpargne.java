@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 
-@DiscriminatorValue("CompteEpargne")
+@DiscriminatorValue("CompteE")
 
 @NamedQueries({
     @NamedQuery(name = "CompteEpargne.findAll", query = "SELECT ce FROM CompteEpargne ce") })
@@ -36,20 +36,23 @@ public class CompteEpargne extends Compte implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long numeroCompte;
     
-    @Column(nullable=false)
+    @Column( nullable=false,columnDefinition="Decimal(10,2)")
     private double taux;
 
     public CompteEpargne() {
+        this.taux = 0.0;
     }
     
 
     public CompteEpargne(double taux,Long numeroCompte, Date dateCreation, double solde) {
         super(numeroCompte,dateCreation,solde);
+        this.taux = 0.0;
         this.taux = taux;
     }
     
      public CompteEpargne(double taux,Date dateCreation, double solde) {
         super(dateCreation,solde);
+        this.taux = 0.0;
         this.taux = taux;
     }
     
@@ -68,24 +71,8 @@ public class CompteEpargne extends Compte implements Serializable {
         this.setSolde(newSold);
     }
     
-     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (numeroCompte != null ? numeroCompte.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
-            return false;
-        }
-        CompteEpargne other = (CompteEpargne) object;
-        if ((this.numeroCompte == null && other.numeroCompte != null) || (this.numeroCompte != null && !this.numeroCompte.equals(other.numeroCompte))) {
-            return false;
-        }
-        return true;
-    }
+    
 }
+
+
 

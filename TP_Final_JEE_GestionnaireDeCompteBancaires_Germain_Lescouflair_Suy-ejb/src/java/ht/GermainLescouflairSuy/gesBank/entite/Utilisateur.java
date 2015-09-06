@@ -27,15 +27,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author MyPC
  */
 @Entity
-
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="ROLE",discriminatorType=DiscriminatorType.STRING)
-@DiscriminatorValue("Users")
-
+@DiscriminatorColumn(name="ROLECLIENT",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("Utilisator")
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT usr FROM Users usr")})
+    @NamedQuery(name = "Utilisateur.findAll", query = "SELECT usr FROM Utilisateur usr")})
 @XmlRootElement
-public abstract class Users implements Serializable {
+public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,14 +48,14 @@ public abstract class Users implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
     private String utilisateur;
-    @Column(name="ROLE")
-    private String ROLE ;
+    @Column(name="ROLECLIENT")
+    private String ROLECLIENT ;
     
 
-    public Users() {
+    public Utilisateur() {
     }
 
-    public Users(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur) {
+    public Utilisateur(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur) {
         this.id = id;
         this.connected = connected;
         this.created = created;
@@ -68,7 +66,7 @@ public abstract class Users implements Serializable {
     }
     
     
-    public Users(boolean connected, Date created, String email, String password, Date updateAt, String utilisateur) {
+    public Utilisateur(boolean connected, Date created, String email, String password, Date updateAt, String utilisateur) {
         this.connected = connected;
         this.created = created;
         this.email = email;
@@ -86,12 +84,12 @@ public abstract class Users implements Serializable {
         this.id = id;
     }
 
-    public String getROLE() {
-        return ROLE;
+    public String getROLECLIENT() {
+        return ROLECLIENT;
     }
 
-    public void setROLE(String ROLE) {
-        this.ROLE = ROLE;
+    public void setROLECLIENT(String ROLECLIENT) {
+        this.ROLECLIENT = ROLECLIENT;
     }
     
     
@@ -158,10 +156,10 @@ public abstract class Users implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof Utilisateur)) {
             return false;
         }
-        Users other = (Users) object;
+        Utilisateur other = (Utilisateur) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -174,3 +172,5 @@ public abstract class Users implements Serializable {
     }
     
 }
+
+

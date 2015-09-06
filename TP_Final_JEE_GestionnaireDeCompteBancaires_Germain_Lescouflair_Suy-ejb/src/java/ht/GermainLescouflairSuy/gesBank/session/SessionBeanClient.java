@@ -5,7 +5,7 @@
  */
 package ht.GermainLescouflairSuy.gesBank.session;
 
-import ht.GermainLescouflairSuy.gesBank.entite.Client;
+import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
 import java.io.Serializable;
@@ -26,13 +26,13 @@ public class SessionBeanClient implements Serializable {
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
     private EntityManager em;
 
-    private Client client;
+    private ClientBanque client;
 
     public SessionBeanClient() {
     }
     
     
-     public SessionBeanClient(EntityManager em, Client client) {
+     public SessionBeanClient(EntityManager em, ClientBanque client) {
         this.em = em;
         this.client = client;
     }
@@ -69,7 +69,7 @@ public class SessionBeanClient implements Serializable {
          return query.getResultList();
      }
      
-     public List<Compte> listerComptes(Client clt){
+     public List<Compte> listerComptes(ClientBanque clt){
         
          return clt.getComptes();
      }
@@ -83,6 +83,7 @@ public class SessionBeanClient implements Serializable {
 
    
      
+    
     
     
     

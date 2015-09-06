@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TypeCompte",discriminatorType=DiscriminatorType.STRING)
-@DiscriminatorValue("Compte")
+@DiscriminatorValue("CompteB")
 
 @NamedQueries({
     @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")})
@@ -47,10 +47,10 @@ public class Compte implements Serializable {
     private Long numeroCompte;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateCreation;
-     @Column(nullable=false,length=30)
+    @Column(nullable=false,length=30)
     private double solde;
     @ManyToOne
-    private Client client;
+    private ClientBanque clientBanque;
     @Column(name="TypeCompte")
     private String typeCompte;
    
@@ -93,12 +93,12 @@ public class Compte implements Serializable {
         this.numeroCompte = numeroCompte;
     }
 
-    public Client getClient() {
-        return client;
+    public ClientBanque getClientBanque() {
+        return clientBanque;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientBanque(ClientBanque clientBanque) {
+        this.clientBanque = clientBanque;
     }
 
     public List<OperationBancaire> getOperations() {
@@ -163,4 +163,6 @@ public class Compte implements Serializable {
     }
     
 }
+
+
 

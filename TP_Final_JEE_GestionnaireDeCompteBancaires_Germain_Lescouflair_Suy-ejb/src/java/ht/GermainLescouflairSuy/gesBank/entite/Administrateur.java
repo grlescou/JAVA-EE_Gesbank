@@ -22,24 +22,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lyzzy
  */
 @Entity
-@DiscriminatorValue("Admin")
+@DiscriminatorValue("Administ")
 @NamedQueries({
-    @NamedQuery(name = "Admin.findAll", query = "SELECT adm FROM Admin adm")})
+    @NamedQuery(name = "Administrateur.findAll", query = "SELECT adm FROM Administrateur adm")})
 @XmlRootElement
-public class Admin extends Users implements Serializable {
+public class Administrateur extends Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(name="nom",nullable=false)
+
+    @Column(nullable=false)
     private String nom;
-    @Column(name="prenom",nullable=false)
+    @Column(nullable=false)
     private String prenom;
 
-    public Admin() {
+    public Administrateur() {
     }
+    
 
-    public Admin(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
+    public Administrateur(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
         super(connected,created,email,password,updateAt,utilisateur);
         this.id=id;
         this.nom = nom;
@@ -47,7 +46,7 @@ public class Admin extends Users implements Serializable {
         
     }
     
-     public Admin(boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
+     public Administrateur(boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
         super(connected,created,email,password,updateAt,utilisateur);
         this.nom = nom;
         this.prenom = prenom;
@@ -69,24 +68,6 @@ public class Admin extends Users implements Serializable {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
-            return false;
-        }
-        Users other = (Users) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+    
         
 }

@@ -57,12 +57,11 @@ public class OperationBancaire implements Serializable {
      */
 
     /**
-     *
-     * @param Description
+     *@param  dateOperation
      * @param description
      * @param montant
      */
-    public OperationBancaire(String Description, Date dateOperation, double montant){
+    public OperationBancaire(String description, Date dateOperation, double montant){
         this.description = description;
         dateOperation = new Date();
         this.montant = montant;
@@ -143,3 +142,5 @@ public class OperationBancaire implements Serializable {
     }
     
 }
+
+

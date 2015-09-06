@@ -6,7 +6,7 @@
 package ht.GermainLescouflairSuy.gesBank.page.jsf.client;
 
 
-import ht.GermainLescouflairSuy.gesBank.entite.Client;
+import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
@@ -25,7 +25,7 @@ import javax.faces.bean.RequestScoped;
 public class ClientTrasactionBancaireMBean {
     @EJB
     private SessionBeanClient sessionBeanClient;
-    private Client client ;
+    private ClientBanque client ;
     private Compte compteBancaire;
     private Compte SelectedcompteBancaire;
     private String btnString ;
@@ -38,7 +38,7 @@ public class ClientTrasactionBancaireMBean {
     public ClientTrasactionBancaireMBean() {
     }
     
-    public void loadClientFromSession(Client client ){
+    public void loadClientFromSession(ClientBanque client ){
         this.client = client;
     }
     
@@ -50,11 +50,11 @@ public class ClientTrasactionBancaireMBean {
         return compte.getOperations();
     }
 
-    public Client getClient() {
+    public ClientBanque getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientBanque client) {
         this.client = client;
     }
 

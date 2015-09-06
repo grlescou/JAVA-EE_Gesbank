@@ -5,7 +5,7 @@
  */
 package ht.GermainLescouflairSuy.gesBank.page.jsf;
 
-import ht.GermainLescouflairSuy.gesBank.entite.Client;
+import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanUserLogin;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -42,7 +42,7 @@ public class LoginMBean {
      * Creates a new instance of LoginMBean
      */
     
-    private Client client ;
+    private ClientBanque client ;
     private String user;
     private String password ;
     private boolean connected = false;
@@ -61,16 +61,16 @@ public class LoginMBean {
     public LoginMBean() {
          //  nh = fc.getApplication().getNavigationHandler();
   nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
-           client = new Client();
+           client = new ClientBanque();
            client.setNom("Lescouflair");
            client.setPrenom("Gaetan Robert");
     }
 
-    public Client getClient() {
+    public ClientBanque getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientBanque client) {
         this.client = client;
     }
 

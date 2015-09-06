@@ -5,8 +5,8 @@
  */
 package ht.GermainLescouflairSuy.gesBank.session;
 
-import ht.GermainLescouflairSuy.gesBank.entite.Admin;
-import ht.GermainLescouflairSuy.gesBank.entite.Client;
+import ht.GermainLescouflairSuy.gesBank.entite.Administrateur;
+import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteCourant;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteEpargne;
@@ -28,9 +28,10 @@ import javax.persistence.Query;
 public class SessionBeanAdmin implements Serializable{
     
     
-    private Admin admin;
+    private Administrateur admin;
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
     private EntityManager em;
+
 
      public void persist(Object object) {
         em.persist(object);
@@ -39,13 +40,13 @@ public class SessionBeanAdmin implements Serializable{
     public SessionBeanAdmin() {
     }
 
-    public SessionBeanAdmin(Admin admin) {
+    public SessionBeanAdmin(Administrateur admin) {
         this.admin = admin;
     }
     
     
     
-    public boolean ajouterClient(Client client){
+    public boolean ajouterClient(ClientBanque client){
         
         persist(client);
         return true;
@@ -57,7 +58,7 @@ public class SessionBeanAdmin implements Serializable{
     }
     
     public void ajouterClientTest(){
-        Client c1 = new Client("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert");
+        ClientBanque c1 = new ClientBanque("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert");
         CompteCourant cpt1 = new CompteCourant (5000,champDate(),10000);
         CompteCourant cpt2 = new CompteCourant (15000,champDate(),100000);
         CompteEpargne cptE1 = new CompteEpargne (1000L,champDate(),100000);
@@ -73,11 +74,11 @@ public class SessionBeanAdmin implements Serializable{
             
     }
     
-    public Client listerClientByid(long idClient){
-        return em.find(Client.class, idClient);
+    public ClientBanque listerClientByid(long idClient){
+        return em.find(ClientBanque.class, idClient);
         
     }
-    public List<Client> listerClients(){
+    public List<ClientBanque> listerClients(){
     
        Query query = em.createNamedQuery("Client.findAll");
        return query.getResultList();
@@ -88,7 +89,7 @@ public class SessionBeanAdmin implements Serializable{
         
     }
       //?
-      public List<Compte> listerCompteClient(Client client){
+      public List<Compte> listerCompteClient(ClientBanque client){
       // Query query = em.createNamedQuery("Compte.findAll");
       // Query querye = em.createNamedQuery("Client")
                
@@ -102,7 +103,7 @@ public class SessionBeanAdmin implements Serializable{
        return query.getResultList();
     }
       
-      public boolean modifierClient(Client client){
+      public boolean modifierClient(ClientBanque client){
           
            em.merge(client);
            return true;
@@ -116,7 +117,7 @@ public class SessionBeanAdmin implements Serializable{
           
       }
        
-          public boolean supprimerClient(Client client){
+          public boolean supprimerClient(ClientBanque client){
           em.remove(client);
           return true;
           
@@ -127,6 +128,10 @@ public class SessionBeanAdmin implements Serializable{
           return true;
           
       }
+
+    public void persist1(Object object) {
+        em.persist(object);
+    }
 
    
 
