@@ -7,8 +7,8 @@
                 xmlns:p="http://primefaces.org/ui"  >
      
     <ui:define name="meta-attr">
-     <f:attribute name="PageRole" value="Client" />
-     <f:viewAction action="#{clientTrasactionBancaireMBean.loadClientFromSession(loginMBean.client)}"/>
+     <f:attribute name="PageRole" value="ClientB" />
+    
     </ui:define>
 
     <ui:define name="complementTitreEtH1">
@@ -46,7 +46,7 @@
                             <h:outputText value="#{item.numeroCompte}"/>
                         </p:column>
                        
-                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{compteBancaireBeans.filterByMontant}">
+                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{clientTrasactionBancaireMBean.filterByMontant}">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
@@ -59,7 +59,7 @@
                                 <h:outputText value="Type Compte"/>
                             </f:facet>
                             
-                            <h:outputText value="#{item.TypeCompte}"/>
+                             <h:outputText value="#{item.discriminatorValue}"/>
                         </p:column>
                          <p:column headerText="Date Creation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" >
                             <f:facet name="header">
@@ -102,7 +102,7 @@
                    <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
                 </f:facet>
                 
-                <h:outputText value="Id:" />
+                <h:outputText value="I:" />
                 <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.id}" />
  
                 <h:outputText value="Nom:" />

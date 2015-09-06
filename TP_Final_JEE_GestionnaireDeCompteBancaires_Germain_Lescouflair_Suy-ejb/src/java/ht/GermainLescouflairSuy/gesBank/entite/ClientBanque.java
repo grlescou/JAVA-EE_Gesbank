@@ -34,11 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public class ClientBanque extends Utilisateur implements Serializable  {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-     Long id;
-    @Column(nullable=false,length=20)
-    private String nifCin;
+
+    @Column(nullable=true)
+    private String nifCin="N/A";
      @Column(nullable=false,length=20)
     private String nom;
     @Column(nullable=false,length=50)
@@ -46,11 +44,13 @@ public class ClientBanque extends Utilisateur implements Serializable  {
     @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER, mappedBy="ClientBanque")
     private List<Compte> comptes=new ArrayList<>();
     
-    public ClientBanque(){}
+    public ClientBanque(){
+        
+}
     
     public ClientBanque(String nifCin,String nom,String prenom,Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){
-        super(connected,created,email,password,updateAt,utilisateur);
-        this.id=id;
+        super(id,connected,created,email,password,updateAt,utilisateur);
+        
         this.nifCin=nifCin;
         this.nom=nom;
         this.prenom=prenom;
@@ -60,6 +60,7 @@ public class ClientBanque extends Utilisateur implements Serializable  {
     
    public ClientBanque(String nifCin,String nom,String prenom,boolean connected, Date created, String email, String password, Date updateAt, String utilisateur){
        super(connected,created,email,password,updateAt,utilisateur);
+       
 
         this.nifCin=nifCin;
         this.nom=nom;

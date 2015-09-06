@@ -16,6 +16,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -52,20 +53,40 @@ public class SessionBeanAdmin implements Serializable{
         return true;
     }
     
+    
+     public boolean ajouterAdmin(Administrateur adm){
+        
+        persist(adm);
+        return true;
+    }
+    
      private Date champDate(){
         Date mydate = new Date();
         return mydate;
     }
     
     public void ajouterClientTest(){
-        ClientBanque c1 = new ClientBanque("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert");
+     //   EntityTransaction tx = em.getTransaction(); 
+
+       // tx .begin( );
+        ClientBanque c1 = new ClientBanque("004-009-009-3", "Robert", "Richard", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert");
         CompteCourant cpt1 = new CompteCourant (5000,champDate(),10000);
         CompteCourant cpt2 = new CompteCourant (15000,champDate(),100000);
         CompteEpargne cptE1 = new CompteEpargne (1000L,champDate(),100000);
+        
+        ajouterCompte(cpt1);
+        ajouterCompte(cpt2);
+        ajouterCompte(cptE1);
+        
         c1.getComptes().add(cpt1);
         c1.getComptes().add(cpt2);
         c1.getComptes().add(cptE1);
         ajouterClient(c1 );
+        //tx.commit();
+       
+        Administrateur admin1 = new Administrateur(true,  champDate(), "robert@gmail.com", "1234", champDate(), "admin","Robert", "Richard");
+        
+        ajouterAdmin(admin1);
     }
 
     public boolean ajouterCompte(Compte compte){
@@ -130,6 +151,10 @@ public class SessionBeanAdmin implements Serializable{
       }
 
     public void persist1(Object object) {
+        em.persist(object);
+    }
+
+    public void persist2(Object object) {
         em.persist(object);
     }
 

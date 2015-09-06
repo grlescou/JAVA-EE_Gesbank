@@ -28,7 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Administrateur extends Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
-
+  //  @Id
+    
+   // private Long idUser; 
     @Column(nullable=false)
     private String nom;
     @Column(nullable=false)
@@ -39,8 +41,8 @@ public class Administrateur extends Utilisateur implements Serializable {
     
 
     public Administrateur(Long id, boolean connected, Date created, String email, String password, Date updateAt, String utilisateur, String nom, String prenom) {
-        super(connected,created,email,password,updateAt,utilisateur);
-        this.id=id;
+        super(id,connected,created,email,password,updateAt,utilisateur);
+        
         this.nom = nom;
         this.prenom = prenom;
         

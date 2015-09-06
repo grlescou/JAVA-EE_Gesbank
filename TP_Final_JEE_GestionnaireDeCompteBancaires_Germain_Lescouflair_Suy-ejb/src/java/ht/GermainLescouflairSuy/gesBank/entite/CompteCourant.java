@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CompteCourant extends Compte implements Serializable {
     private static final long serialVersionUID = 1L;
    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long numeroCompte;
+   // @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+   // private Long numeroCompte;
     
     @Column(nullable=false,columnDefinition="Decimal(10,2)")
     private double montantDecouvertAutorise;

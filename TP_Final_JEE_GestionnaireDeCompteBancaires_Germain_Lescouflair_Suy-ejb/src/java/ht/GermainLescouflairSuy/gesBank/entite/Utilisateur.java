@@ -20,6 +20,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,13 +32,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @DiscriminatorColumn(name="ROLECLIENT",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("Utilisator")
 @NamedQueries({
-    @NamedQuery(name = "Utilisateur.findAll", query = "SELECT usr FROM Utilisateur usr")})
+    @NamedQuery(name = "Utilisateur.findAll", query = "SELECT usr FROM Utilisateur usr"),
+    @NamedQuery(name = "Utilisateur.findByUtilisateur", query = "SELECT usr FROM Utilisateur usr WHERE usr.username=:username")})
 @XmlRootElement
-public class Utilisateur implements Serializable {
+public abstract class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-     Long id;
+    private Long id;
     private boolean connected;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date created;
@@ -47,8 +49,8 @@ public class Utilisateur implements Serializable {
     private String password;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
-    private String utilisateur;
-    @Column(name="ROLECLIENT")
+    private String username;
+    @Column(name="ROLECLIENT", nullable=false, updatable=false, insertable=false)
     private String ROLECLIENT ;
     
 
@@ -62,7 +64,7 @@ public class Utilisateur implements Serializable {
         this.email = email;
         this.password = password;
         this.updateAt = updateAt;
-        this.utilisateur = utilisateur;
+        this.username = utilisateur;
     }
     
     
@@ -72,10 +74,11 @@ public class Utilisateur implements Serializable {
         this.email = email;
         this.password = password;
         this.updateAt = updateAt;
-        this.utilisateur = utilisateur;
+        this.username = utilisateur;
     }
     
 
+    @Id
     public Long getId() {
         return id;
     }
@@ -134,17 +137,20 @@ public class Utilisateur implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public String getUtilisateur() {
-        return utilisateur;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUtilisateur(String utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
-    public String getRole(){
-        return DiscriminatorValue.class.getName();
-    }
+   @Transient
+    public String getDiscriminatorValue(){
+    DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+    return val == null ? null : val.value();
+}
 
     @Override
     public int hashCode() {

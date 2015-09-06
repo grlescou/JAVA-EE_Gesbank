@@ -67,7 +67,7 @@ body,html{
     background-color: scrollbar;
     padding-bottom: 1%;
     width: 16%;
-    height: 70%;
+    /*height: 70%;*/
     margin: 0 0 0px 0px;
     border: 2px solid #808080;
 }
@@ -113,7 +113,7 @@ body,html{
     padding: 0.5%;
     margin-top: 0px ;
     margin-left: 16.2%;
-    height: 70%;
+  /* height: 100%;*/
     width: 82.3%;
     border: 2px solid #808080;
 }

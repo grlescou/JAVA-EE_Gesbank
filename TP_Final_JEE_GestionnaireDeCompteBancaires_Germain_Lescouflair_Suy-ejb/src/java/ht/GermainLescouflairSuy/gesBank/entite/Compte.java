@@ -19,11 +19,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,15 +34,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lyzzy
  */
 @Entity
-
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TypeCompte",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("CompteB")
-
 @NamedQueries({
     @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")})
 @XmlRootElement
-public class Compte implements Serializable {
+public abstract class Compte implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,7 +50,7 @@ public class Compte implements Serializable {
     @Column(nullable=false,length=30)
     private double solde;
     @ManyToOne
-
+    @JoinColumn(name="OWNER_ID")
     private ClientBanque clientBanque;
 
     @Column(name="TypeCompte")
@@ -77,7 +77,9 @@ public class Compte implements Serializable {
     }
 
 
+    @Id
     public String getTypeCompte() {
+        typeCompte = getDiscriminatorValue();
         return typeCompte;
     }
 
@@ -110,6 +112,12 @@ public class Compte implements Serializable {
         this.Operations = Operations;
     }
 
+    @Transient
+    public String getDiscriminatorValue(){
+    DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+    return val == null ? null : val.value();
+}
     
     @Override
     public int hashCode() {
