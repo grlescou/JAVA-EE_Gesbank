@@ -59,7 +59,7 @@ public class SessionBeanClient implements Serializable {
     }
       
              
-     public Compte listerCompteByid(long idCompte){
+     public Compte getCompteByid(long idCompte){
         
         return  em.find(Compte.class, idCompte);
     }

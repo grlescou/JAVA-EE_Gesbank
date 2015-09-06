@@ -8,14 +8,15 @@ package ht.GermainLescouflairSuy.gesBank.page.jsf.admin;
 import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author MyPC
  */
-@Named(value = "adminMBean")
+@ManagedBean(name = "adminMBean")
 @ViewScoped
 public class AdminMBean {
     @EJB

@@ -150,14 +150,7 @@ public class SessionBeanAdmin implements Serializable{
           
       }
 
-    public void persist1(Object object) {
-        em.persist(object);
-    }
-
-    public void persist2(Object object) {
-        em.persist(object);
-    }
-
+   
    
 
 
