@@ -74,6 +74,8 @@ public abstract class Compte implements Serializable {
     public Compte(Date dateCreation, double solde) {
         this.dateCreation = dateCreation;
         this.solde = solde;
+         Date dateOperation = new Date();
+        this.Operations.add(new OperationBancaire (dateOperation,TypeOperation.CREATION.getType(),solde));
     }
 
 
