@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../templates/default_template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="meta-attr">
+      <f:attribute name="PageRole" value="Client" />
+    </ui:define>
+
+    <ui:define name="complementTitreEtH1">
+        Dépôt / Retrait
+    </ui:define>
+
+    <ui:define name="content-title">
+        Dépôt / Retrait
+    </ui:define>
+
+    <ui:define name="content">
+       <f:view>
+          <h:form id="operation" class="classFormCenter" >
+            
+            <h:panelGrid columns="2" class="classFormMargin">
+              <h:outputLabel value="Id:" for="id" class="classFormMargin" />
+              <h:inputText id="id" class="classFormMargin classField" value="#{transactionBean.compte.id}" 
+                           title="Id" readonly="true"/>
+              <h:outputLabel value="Nom :" for="nom" class="classFormMargin" />
+              <h:inputText id="nom" class="classFormMargin classField"
+                           value="#{transactionBean.compte.nom}" 
+                           title="Nom" readonly="true"/>
+              <h:outputLabel value="Solde:" for="solde" class="classFormMargin"/>
+              <h:inputText id="solde" class="classFormMargin classField" value="#{transactionBean.compte.solde}" 
+                           title="Solde" readonly="true"/>
+            </h:panelGrid>
+            
+            <h2>Effectuer un dépôt ou un retrait </h2>
+            <h:panelGrid columns="2" class="classFormMargin">
+            <h:selectOneRadio id="ajout-retrait" 
+                              value="#{transactionBean.typeTransac}"
+                              required="true"
+                              requiredMessage="Vous devez dire si c'est un ajout ou un retrait">
+              <f:selectItem itemLabel="Deposer de l'argent" itemValue="depot" class="classFormMargin"/>
+              <f:selectItem itemLabel="Retirer de l'argent" itemValue="retrait" class="classFormMargin"/>
+            </h:selectOneRadio>
+            <h:message id="message-ajout-retrait" for="ajout-retrait"
+                       errorStyle="color:red"/>
+            </h:panelGrid>
+            
+            Montant :
+            <h:inputText class="classFormMargin classField" id="montant" value="#{transactionBean.montant}"
+                         required="true"/>
+            <h:message id="message-montant" for="montant" errorStyle="color:red"/>
+            <br/>
+            <h:commandButton class="classBtnBig " value="Lancer l'opération" 
+                             action="#{transactionBean.effectuerTransaction()}">
+             <f:ajax execute="ajout-retrait montant" render="solde message-montant message-ajout-retrait"/>
+            </h:commandButton>
+
+          </h:form>
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>

@@ -26,6 +26,7 @@ import javax.faces.event.ComponentSystemEvent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 
 /**
@@ -132,7 +133,7 @@ public class LoginMBean {
     public void checkConnection(){
         //Client client =  null;
         connected = (user.equals("grl") && password.equals("1234"));
-        Role="Client";
+        Role="Admin";
         init();
          if(connected){
            
@@ -191,9 +192,14 @@ public class LoginMBean {
         DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
          
         DefaultMenuItem item = new DefaultMenuItem("Mes Comptes");
-        item.setUrl("http://www.primefaces.org");
+        item.setUrl("MesComptes.xhtml");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
+        DefaultMenuItem item2=new DefaultMenuItem("Depot/Retrait");
+        item2.setUrl("transfertClient.xhtml");
+        item2.setIcon("ui-icon-home");
+        firstSubmenu.addElement(item2);
+        
          
         model.addElement(firstSubmenu);
          
@@ -233,6 +239,12 @@ public class LoginMBean {
         item.setUrl("http://www.primefaces.org");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
+        
+         DefaultMenuItem item2 = new DefaultMenuItem("Nouveau Client");
+        item2.setUrl("EnregistrerClients.xhtml");
+        item2.setIcon("ui-icon-home");
+        firstSubmenu.addElement(item2);
+        
          
         model.addElement(firstSubmenu);
          
