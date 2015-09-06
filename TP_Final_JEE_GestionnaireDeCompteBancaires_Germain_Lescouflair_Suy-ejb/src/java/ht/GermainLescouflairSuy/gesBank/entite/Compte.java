@@ -50,7 +50,9 @@ public class Compte implements Serializable {
     @Column(nullable=false,length=30)
     private double solde;
     @ManyToOne
+
     private ClientBanque clientBanque;
+
     @Column(name="TypeCompte")
     private String typeCompte;
    
@@ -74,7 +76,6 @@ public class Compte implements Serializable {
         this.solde = solde;
     }
 
-    
 
     public String getTypeCompte() {
         return typeCompte;

@@ -36,7 +36,6 @@ public class SessionBeanUserLogin  implements Serializable{
        return false;
    }
 
-   
     public void persist(Object object) {
         em.persist(object);
     }

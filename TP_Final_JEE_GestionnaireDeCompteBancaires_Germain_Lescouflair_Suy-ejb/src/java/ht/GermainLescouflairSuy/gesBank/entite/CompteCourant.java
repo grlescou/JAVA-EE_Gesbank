@@ -55,6 +55,7 @@ public class CompteCourant extends Compte implements Serializable {
     }
     
     
+    
     public double getMontantDecouvertAutorise() {
         return montantDecouvertAutorise;
     }
@@ -63,7 +64,7 @@ public class CompteCourant extends Compte implements Serializable {
         this.montantDecouvertAutorise = montantDecouvertAutorise;
     }
    
-    
+
    
 }
 
