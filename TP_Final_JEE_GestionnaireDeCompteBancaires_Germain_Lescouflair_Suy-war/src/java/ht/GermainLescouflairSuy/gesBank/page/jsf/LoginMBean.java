@@ -5,9 +5,13 @@
  */
 package ht.GermainLescouflairSuy.gesBank.page.jsf;
 
+import ht.GermainLescouflairSuy.gesBank.entite.Administrateur;
 import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
+import ht.GermainLescouflairSuy.gesBank.entite.Utilisateur;
+import ht.GermainLescouflairSuy.gesBank.page.jsf.Emumeration.RoleUser;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanUserLogin;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -35,7 +39,7 @@ import org.primefaces.model.menu.MenuModel;
  */
 @ManagedBean
 @SessionScoped
-public class LoginMBean {
+public class LoginMBean implements Serializable {
     @EJB
     private SessionBeanUserLogin sessionBeanUserLogin;
 
@@ -43,11 +47,13 @@ public class LoginMBean {
      * Creates a new instance of LoginMBean
      */
     
+    private Utilisateur userClient ;
     private ClientBanque client ;
+    private Administrateur AdminClient ;
     private String user;
     private String password ;
     private boolean connected = false;
-    private String Role="Client" ;
+    private String Role="ClientB" ;
     private String PageRole;
     //ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
     FacesContext fc = FacesContext.getCurrentInstance();
@@ -62,17 +68,15 @@ public class LoginMBean {
     public LoginMBean() {
          //  nh = fc.getApplication().getNavigationHandler();
   nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
-           client = new ClientBanque();
-           client.setNom("Lescouflair");
-           client.setPrenom("Gaetan Robert");
+          
     }
 
-    public ClientBanque getClient() {
-        return client;
+    public Utilisateur getUserClient() {
+        return userClient;
     }
 
-    public void setClient(ClientBanque client) {
-        this.client = client;
+    public void setUserClient(Utilisateur userClient) {
+        this.userClient = userClient;
     }
 
     public String getUser() {
@@ -120,6 +124,14 @@ public class LoginMBean {
     public void setPageRole(String PageRole) {
         this.PageRole = PageRole;
     }
+
+    public ClientBanque getClient() {
+        return client;
+    }
+
+    public void setClient(ClientBanque Client) {
+        this.client = Client;
+    }
     
        
     
@@ -132,26 +144,41 @@ public class LoginMBean {
     
     public void checkConnection(){
         //Client client =  null;
-        connected = (user.equals("grl") && password.equals("1234"));
-        Role="Admin";
-        init();
+        //connected = (user.equals("grl") && password.equals("1234"));
+         connected = sessionBeanUserLogin.loginController(user, password);
+        
          if(connected){
-           
+             userClient =  sessionBeanUserLogin.getUtilisateurByUsername(user);
+           if(userClient ==  null){
+                nav.performNavigation("/faces/login.xhtml?faces-redirect=true");
+           }
+           else{
+                Role=userClient.getDiscriminatorValue();
+                System.out.println("Role user est :"+Role+" username :"+userClient.getUsername());
+                 init();
+          
+             
+            
+            
       
-                  if(this.Role.equals("Client"))
-             {
+                  if(this.Role.equals(RoleUser.Client.getRole()))
+             {      
+                 client = (ClientBanque) userClient;
                  //    return "client/MesComptes.xhtml?faces-redirect=true";
                  nav.performNavigation("/faces/client/MesComptes.xhtml?faces-redirect=true");
              }
-              if(this.Role.equals("Admin"))
-              {
+              if(this.Role.equals(RoleUser.Admin.getRole()))
+              {    AdminClient = (Administrateur) userClient;
                 nav.performNavigation("/faces/admin/ListeComptes.xhtml?faces-redirect=true");  
-              }   
+              } 
+              
+           }    
+              
         }
          else{
                nav.performNavigation("/faces/login.xhtml?faces-redirect=true");
          }
-        
+         
         
     }
     
@@ -183,7 +210,7 @@ public class LoginMBean {
     public void init() {
         
      model = new DefaultMenuModel();   
-     if(Role.equals("Client")){
+     if(Role.equals(RoleUser.Client.getRole())){
         
         
         
@@ -227,7 +254,7 @@ public class LoginMBean {
         
         }
         
-         if(Role.equals("Admin")){
+         if(Role.equals(RoleUser.Admin.getRole())){
         
         
         

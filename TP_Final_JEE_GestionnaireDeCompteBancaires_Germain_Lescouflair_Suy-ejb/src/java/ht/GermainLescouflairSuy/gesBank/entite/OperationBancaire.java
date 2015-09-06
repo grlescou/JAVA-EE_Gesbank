@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.metamodel.SingularAttribute;
@@ -39,6 +40,7 @@ public class OperationBancaire implements Serializable {
     private double montant;
     
     @ManyToOne
+    @JoinColumn(name="Compte_ID")
     private Compte compte;
 
     public OperationBancaire(){}

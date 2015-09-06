@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -32,9 +33,37 @@ public class SessionBeanUserLogin  implements Serializable{
 
     
    public boolean loginController(String utilisateur, String password ){
+       Query q  = em.createNamedQuery("Utilisateur.findByUtilisateur",Utilisateur.class);
+       q.setParameter("username", utilisateur);
        
-       return false;
+       users =(Utilisateur) q.getSingleResult();
+       if(users == null){
+           return false;
+       }
+       else {
+           if(password.equals(users.getPassword())){
+               return true;
+           }
+           else{
+           return false;
+           }
+       }
+       
    }
+   
+   public Utilisateur getUtilisateurByUsername(String username){
+       Query q  = em.createNamedQuery("Utilisateur.findByUtilisateur",Utilisateur.class);
+       q.setParameter("username", username);
+       
+       users =(Utilisateur) q.getSingleResult();
+       if(users != null){
+           return users;
+       }
+       else{
+           return null;
+       }
+   }
+   
 
     public void persist(Object object) {
         em.persist(object);
