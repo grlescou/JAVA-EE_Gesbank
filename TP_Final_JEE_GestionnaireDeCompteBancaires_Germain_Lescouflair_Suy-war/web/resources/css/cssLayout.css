@@ -60,7 +60,7 @@ body,html{
     
 }
 #container{
-    min-height: 30%;
+    min-height: 35%;
 }
 
 #left {
@@ -181,3 +181,7 @@ body,html{
      color: whitesmoke;
 }   
 
+#content{
+    
+    min-height: 75%;
+}

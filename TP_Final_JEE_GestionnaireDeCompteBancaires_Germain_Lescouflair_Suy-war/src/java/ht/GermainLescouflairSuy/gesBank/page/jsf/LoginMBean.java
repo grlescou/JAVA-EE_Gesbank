@@ -222,6 +222,7 @@ public class LoginMBean implements Serializable {
         item.setUrl("MesComptes.xhtml");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
+        
         DefaultMenuItem item2=new DefaultMenuItem("Depot/Retrait");
         item2.setUrl("transfertClient.xhtml");
         item2.setIcon("ui-icon-home");
@@ -263,7 +264,7 @@ public class LoginMBean implements Serializable {
         DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
          
         DefaultMenuItem item = new DefaultMenuItem("Liste des Comptes");
-        item.setUrl("http://www.primefaces.org");
+        item.setUrl("ListeComptes.xhtml");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
         
@@ -271,6 +272,11 @@ public class LoginMBean implements Serializable {
         item2.setUrl("EnregistrerClients.xhtml");
         item2.setIcon("ui-icon-home");
         firstSubmenu.addElement(item2);
+        
+        DefaultMenuItem item3 = new DefaultMenuItem("Ouvrir un compte");
+        item3.setUrl("EnregistrerCompte.xhtml");
+        item3.setIcon("ui-icon-home");
+        firstSubmenu.addElement(item3);
         
          
         model.addElement(firstSubmenu);

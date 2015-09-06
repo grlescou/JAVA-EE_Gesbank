@@ -4,10 +4,10 @@
                 template="./../templates/default_template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                  xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui" >
+                 xmlns:p="http://primefaces.org/ui" >
 
     <ui:define name="meta-attr">
-        <f:attribute name="PageRole" value="Admin" />
+        <f:attribute name="PageRole" value="Administ" />
     </ui:define>
     
     <ui:define name="complementTitreEtH1">
@@ -19,7 +19,42 @@
     </ui:define>
     
     <ui:define name="content">
-        content
+        <f:view>
+
+
+            <h:form >
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="NifCin:" for="nifCin" />
+                    <h:inputText id="nifCin" value="#{adminMBean.client.nifCin}" title="NifCin" />
+                    <h:outputLabel value="Nom:" for="nom" />
+                    <h:inputText id="nom" value="#{adminMBean.client.nom}" title="Nom" required="true" requiredMessage="The Nom field is required."/>
+                    <h:outputLabel value="Prenom:" for="prenom" />
+                    <h:inputText id="prenom" value="#{adminMBean.client.prenom}" title="Prenom" required="true" requiredMessage="The Prenom field is required."/>
+                    <h:outputLabel value="Id:" for="id" />
+                    <h:inputText id="id" value="#{adminMBean.client.id}" title="Id" />
+                    <h:outputLabel value="ROLECLIENT:" for="ROLECLIENT" />
+                    <h:inputText id="ROLECLIENT" value="#{adminMBean.client.ROLECLIENT}" title="ROLECLIENT" />
+                    <h:outputLabel value="Created:" for="created" />
+                    <h:inputText id="created" value="#{adminMBean.client.created}" title="Created" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText id="email" value="#{adminMBean.client.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                    <h:outputLabel value="Password:" for="password" />
+                    <h:inputText id="password" value="#{adminMBean.client.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                    <h:outputLabel value="UpdateAt:" for="updateAt" />
+                    <h:inputText id="updateAt" value="#{adminMBean.client.updateAt}" title="UpdateAt" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="Username:" for="username" />
+                    <h:inputText id="username" value="#{adminMBean.client.username}" title="Username" />
+                    <h:commandButton id="back" value="Back" />  
+ <h:commandButton id="update" value="Enregistrer" /> 
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
     </ui:define>
     
 </ui:composition>
