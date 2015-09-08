@@ -268,21 +268,28 @@ public class LoginMBean implements Serializable {
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
         
-         DefaultMenuItem item2 = new DefaultMenuItem("Nouveau Client");
-        item2.setUrl("EnregistrerClients.xhtml");
+        DefaultMenuItem item2 = new DefaultMenuItem("Liste des Clients");
+        item2.setUrl("ListeClients.xhtml");
         item2.setIcon("ui-icon-home");
         firstSubmenu.addElement(item2);
         
-        DefaultMenuItem item3 = new DefaultMenuItem("Ouvrir un compte");
-        item3.setUrl("EnregistrerCompte.xhtml");
-        item3.setIcon("ui-icon-home");
-        firstSubmenu.addElement(item3);
+      
         
          
         model.addElement(firstSubmenu);
          
         //Second submenu
         DefaultSubMenu secondSubmenu = new DefaultSubMenu("Dynamic Actions");
+        
+        item = new DefaultMenuItem("Nouveau Client");
+        item.setUrl("EnregistrerClients.xhtml");
+        item.setIcon("ui-icon-home");
+        secondSubmenu.addElement(item);
+        
+        item= new DefaultMenuItem("Ouvrir un compte");
+        item.setUrl("EnregistrerCompte.xhtml");
+        item.setIcon("ui-icon-home");
+        secondSubmenu.addElement(item);
  
         item = new DefaultMenuItem("Save");
         item.setIcon("ui-icon-disk");
