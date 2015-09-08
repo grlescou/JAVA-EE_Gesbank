@@ -30,6 +30,7 @@ import javax.faces.event.ComponentSystemEvent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 
 /**
@@ -131,6 +132,14 @@ public class LoginMBean implements Serializable {
     public void setClient(ClientBanque Client) {
         this.client = Client;
     }
+
+    public Administrateur getAdminClient() {
+        return AdminClient;
+    }
+
+    public void setAdminClient(Administrateur AdminClient) {
+        this.AdminClient = AdminClient;
+    }
     
        
     
@@ -218,9 +227,15 @@ public class LoginMBean implements Serializable {
         DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
          
         DefaultMenuItem item = new DefaultMenuItem("Mes Comptes");
-        item.setUrl("http://www.primefaces.org");
+        item.setUrl("MesComptes.xhtml");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
+        
+        DefaultMenuItem item2=new DefaultMenuItem("Depot/Retrait");
+        item2.setUrl("transfertClient.xhtml");
+        item2.setIcon("ui-icon-home");
+        firstSubmenu.addElement(item2);
+        
          
         model.addElement(firstSubmenu);
          
@@ -257,9 +272,20 @@ public class LoginMBean implements Serializable {
         DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
          
         DefaultMenuItem item = new DefaultMenuItem("Liste des Comptes");
-        item.setUrl("http://www.primefaces.org");
+        item.setUrl("ListeComptes.xhtml");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
+        
+         DefaultMenuItem item2 = new DefaultMenuItem("Nouveau Client");
+        item2.setUrl("EnregistrerClients.xhtml");
+        item2.setIcon("ui-icon-home");
+        firstSubmenu.addElement(item2);
+        
+        DefaultMenuItem item3 = new DefaultMenuItem("Ouvrir un compte");
+        item3.setUrl("EnregistrerCompte.xhtml");
+        item3.setIcon("ui-icon-home");
+        firstSubmenu.addElement(item3);
+        
          
         model.addElement(firstSubmenu);
          

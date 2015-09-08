@@ -18,6 +18,11 @@
         Liste des comptes
     </ui:define>
 
+    
+     <ui:define name="identifier">
+        #{loginMBean.adminClient.prenom} #{loginMBean.adminClient.nom}  
+    </ui:define>
+    
     <ui:define name="content">
                 
         
@@ -27,10 +32,10 @@
 
                 <h:form>
                     
-                    <p:dataTable  id="radioDT" value="#{compteBancaireBeans.comptes}" var="item"  widgetVar="compteTb"
+                    <p:dataTable  id="radioDT" value="#{adminMBean.listeComptes}" var="item"  widgetVar="compteTb"
                      paginator="true" rows="10" rowsPerPageTemplate="10,20" sortMode="multiple" emptyMessage="Aucun Compte Bancaire Trouve..." 
-                    filteredValue="#{compteBancaireBeans.compteBancaireFilter}"
-                    selection="#{compteBancaireBeans.selectedcompteBancaire}" rowKey="#{item.id}">
+                    filteredValue="#{adminMBean.compteBancaireFilter}"
+                    selection="#{adminMBean.selectedcompteBancaire}" rowKey="#{item.numeroCompte}">
                         <f:facet name="header">  
                     <p:outputPanel>  
                         <h:outputText value="Rechercher : " />  
@@ -38,20 +43,15 @@
                     </p:outputPanel>  
                   </f:facet> 
                         <p:column selectionMode="single" style="width:16px;text-align:center"/>
-                        <p:column headerText="Id" filterBy="#{item.id}" sortBy="#{item.id}" filterMatchMode="contains" >
+                        <p:column headerText="Numero Compte" filterBy="#{item.numeroCompte}" sortBy="#{item.numeroCompte}" filterMatchMode="contains" >
                             <f:facet name="header">
-                                <h:outputText value="Id"/>
+                                <h:outputText value="Numero Compte"/>
                             </f:facet>
                             
-                            <h:outputText value="#{item.id}"/>
+                            <h:outputText value="#{item.numeroCompte}"/>
                         </p:column>
-                        <p:column headerText="Nom" filterBy="#{item.nom}" sortBy="#{item.nom}" filterMatchMode="contains" >
-                            <f:facet name="header">
-                                <h:outputText value="Nom"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nom}"/>
-                        </p:column>
-                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{compteBancaireBeans.filterByMontant}">
+                       
+                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{adminMBean.filterByMontant}">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
@@ -59,13 +59,28 @@
                               <f:convertNumber currencySymbol="HTG " type="currency"/>
                            </h:outputText>
                         </p:column>
+                         <p:column headerText="Type Compte" filterBy="#{item.numeroCompte}" sortBy="#{item.numeroCompte}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Type Compte"/>
+                            </f:facet>
+                            
+                             <h:outputText value="#{item.discriminatorValue}"/>
+                        </p:column>
+                         <p:column headerText="Date Creation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Date Creation"/>
+                            </f:facet>
+                             <h:outputText value="#{item.dateCreation}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+               
                          <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Action"/>
                             </f:facet>
-                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.id)}" value="Details"/>
-                             <h:link class="lien" outcome="#{compteBancaireBeans.getActiontStringModif(item.id)}" value="Modifier"/>
-                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.id)}" value="Depots/Retrait"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.numeroCompte)}" value="Details"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.numeroCompte)}" value="Depots/Retrait"/>
                             
 
                         </p:column>
@@ -91,18 +106,18 @@
                    <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
                 </f:facet>
                 
-                <h:outputText value="Id:" />
-                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.id}" />
+                <h:outputText value="I:" />
+                <h:outputText value="#{adminMBean.selectedcompteBancaire.id}" />
  
                 <h:outputText value="Nom:" />
-                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.nom}" />
+                <h:outputText value="#{adminMBean.selectedcompteBancaire.nom}" />
  
                 <h:outputText value="Solde:" />
-                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.solde}" />
+                <h:outputText value="#{adminMBean.selectedcompteBancaire.solde}" />
                 
                <p:commandButton class="lien" 
                                 type="submit"
-                                 action="#{compteBancaireBeans.delete(compteBancaireBeans.selectedcompteBancaire)}"
+                                 action="#{adminMBean.delete(compteBancaireBeans.selectedcompteBancaire)}"
                                  value="supprimer"
                                  title="Supprimer"
                                  image="/resources/img/DeleteRed.png"
@@ -116,7 +131,7 @@
  
  
 
-        
+
         
         
         

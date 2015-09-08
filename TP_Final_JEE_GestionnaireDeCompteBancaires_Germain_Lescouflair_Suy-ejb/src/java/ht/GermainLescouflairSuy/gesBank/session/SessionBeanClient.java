@@ -82,7 +82,15 @@ public class SessionBeanClient implements Serializable {
     }
 
    
-     
+      
+       public boolean modifierCompte(Compte compte){
+          
+           em.merge(compte);
+           return true;
+          
+      }
+       
+       
     
     
     

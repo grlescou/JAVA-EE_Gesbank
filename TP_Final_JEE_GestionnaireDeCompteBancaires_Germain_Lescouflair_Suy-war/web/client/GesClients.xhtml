@@ -1,40 +1,24 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../templates/default_template.xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"  >
-     
-    <ui:define name="meta-attr">
-     <f:attribute name="PageRole" value="ClientB" />
-    
-    </ui:define>
-
-    <ui:define name="complementTitreEtH1">
-        Mes Compte
-    </ui:define>
-
-    <ui:define name="content-title">
-       Mes Comptes
-    </ui:define>
-
-     <ui:define name="identifier">
-        #{loginMBean.client.prenom} #{loginMBean.client.nom}  
-    </ui:define>
-    
-    <ui:define name="content">
-       
-           <h:form>
+                xmlns:p="http://primefaces.org/ui"  
+                template="./templates/default_templates.xhtml">
+ <ui:define name="complementTitreEtH1">Liste des Comptes Bancaires</ui:define>
+ 
+ 
+ <ui:define name="content">
+        
+        <h:form>
             <f:view>
 
 
                 <h:form>
-                    
-                    <p:dataTable  id="radioDT" value="#{clientTrasactionBancaireMBean.listeComptes}" var="item"  widgetVar="compteTb"
+                    <h1><h:outputText value="Liste des Comptes Bancaires"/></h1>
+                    <p:dataTable  id="radioDT" value="#{compteBancaireBeans.comptes}" var="item"  widgetVar="compteTb"
                      paginator="true" rows="10" rowsPerPageTemplate="10,20" sortMode="multiple" emptyMessage="Aucun Compte Bancaire Trouve..." 
-                    filteredValue="#{clientTrasactionBancaireMBean.compteBancaireFilter}"
-                    selection="#{clientTrasactionBancaireMBean.selectedcompteBancaire}" rowKey="#{item.numeroCompte}">
+                    filteredValue="#{compteBancaireBeans.compteBancaireFilter}"
+                    selection="#{compteBancaireBeans.selectedcompteBancaire}" rowKey="#{item.id}">
                         <f:facet name="header">  
                     <p:outputPanel>  
                         <h:outputText value="Rechercher : " />  
@@ -42,15 +26,20 @@
                     </p:outputPanel>  
                   </f:facet> 
                         <p:column selectionMode="single" style="width:16px;text-align:center"/>
-                        <p:column headerText="Numero Compte" filterBy="#{item.numeroCompte}" sortBy="#{item.numeroCompte}" filterMatchMode="contains" >
+                        <p:column headerText="Id" filterBy="#{item.id}" sortBy="#{item.id}" filterMatchMode="contains" >
                             <f:facet name="header">
-                                <h:outputText value="Numero Compte"/>
+                                <h:outputText value="Id"/>
                             </f:facet>
                             
-                            <h:outputText value="#{item.numeroCompte}"/>
+                            <h:outputText value="#{item.id}"/>
                         </p:column>
-                       
-                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{clientTrasactionBancaireMBean.filterByMontant}">
+                        <p:column headerText="Nom" filterBy="#{item.nom}" sortBy="#{item.nom}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{compteBancaireBeans.filterByMontant}">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
@@ -58,28 +47,13 @@
                               <f:convertNumber currencySymbol="HTG " type="currency"/>
                            </h:outputText>
                         </p:column>
-                         <p:column headerText="Type Compte" filterBy="#{item.numeroCompte}" sortBy="#{item.numeroCompte}" filterMatchMode="contains" >
-                            <f:facet name="header">
-                                <h:outputText value="Type Compte"/>
-                            </f:facet>
-                            
-                             <h:outputText value="#{item.discriminatorValue}"/>
-                        </p:column>
-                         <p:column headerText="Date Creation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" >
-                            <f:facet name="header">
-                                <h:outputText value="Date Creation"/>
-                            </f:facet>
-                             <h:outputText value="#{item.dateCreation}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-               
                          <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Action"/>
                             </f:facet>
-                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.numeroCompte)}" value="Details"/>
-                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.numeroCompte)}" value="Depots/Retrait"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.id)}" value="Details"/>
+                             <h:link class="lien" outcome="#{compteBancaireBeans.getActiontStringModif(item.id)}" value="Modifier"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.id)}" value="Depots/Retrait"/>
                             
 
                         </p:column>
@@ -105,7 +79,7 @@
                    <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
                 </f:facet>
                 
-                <h:outputText value="I:" />
+                <h:outputText value="Id:" />
                 <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.id}" />
  
                 <h:outputText value="Nom:" />
@@ -129,12 +103,8 @@
     </p:dialog>
  
  
-
-
-        
-        
-        
-        
     </ui:define>
 
+  
+ 
 </ui:composition>

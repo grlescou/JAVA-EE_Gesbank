@@ -139,7 +139,7 @@ public class DetailsComptesBeans implements Serializable {
     
      public String getActiontStringTransaction(long id){
         
-        return "transactionBancaire?idcompt="+id;
+        return "transfertClient?idcompt="+id;
     }
 
     

@@ -21,6 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author lyzzy
  */
+
+//creation de la classe administrateur
+
 @Entity
 @DiscriminatorValue("Administ")
 @NamedQueries({
@@ -36,6 +39,7 @@ public class Administrateur extends Utilisateur implements Serializable {
     @Column(nullable=false)
     private String prenom;
 
+    //constructeur par defaut
     public Administrateur() {
     }
     
