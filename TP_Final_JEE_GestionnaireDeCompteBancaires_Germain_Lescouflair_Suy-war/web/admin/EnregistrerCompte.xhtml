@@ -30,7 +30,7 @@
                     <h:outputLabel value="NumeroCompte:" for="numeroCompte" />
                     <h:inputText id="numeroCompte" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.numeroCompte}" title="NumeroCompte" />
                     <h:outputLabel value="ClientBanque:" for="clientBanque" />
-                    <h:selectOneMenu id="clientBanque" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.clientBanque}" title="ClientBanque" >
+                    <h:selectOneMenu id="clientBanque" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.clientBanque.nom} #{clientTrasactionBancaireMBean.selectedcompteBancaire.clientBanque.nom}" title="ClientBanque" >
                         <!-- TODO: update below reference to list of available items-->
                         <f:selectItems value="#{fixme}"/>
                     </h:selectOneMenu>
