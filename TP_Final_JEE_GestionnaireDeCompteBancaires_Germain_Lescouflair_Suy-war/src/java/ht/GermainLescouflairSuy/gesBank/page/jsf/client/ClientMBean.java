@@ -12,14 +12,15 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author lyzzy
  */
-@Named(value = "clientMBean")
+@ManagedBean(name = "clientMBean")
 @ViewScoped
 public class ClientMBean implements Serializable {
     public List<ClientBanque> clients;
@@ -40,9 +41,9 @@ public class ClientMBean implements Serializable {
      * @return  */
     
     
-     public Collection getClient() {  
-    return sessionBeanAdmin.listerClients();
-     }
-     public String showDetails(int clientId) {  
-        return "CustomerDetails?id=" + clientId;    }  
+//     public Collection getClient() {  
+//         return sessionBeanAdmin.listerClients();
+//     }
+//     public String showDetails(int clientId) {  
+//        return "CustomerDetails?id=" + clientId;    }  
 }

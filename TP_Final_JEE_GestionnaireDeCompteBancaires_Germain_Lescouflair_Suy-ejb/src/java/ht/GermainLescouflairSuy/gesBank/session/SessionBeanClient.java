@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,40 +7,86 @@
 package ht.GermainLescouflairSuy.gesBank.session;
 
 import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
+import ht.GermainLescouflairSuy.gesBank.entite.Compte;
+import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 /**
  *
- * @author lyzzy
+ * @author Rachou
  */
 @Stateless
 @LocalBean
-public class SessionBeanClient {
+public class SessionBeanClient implements Serializable {
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
     private EntityManager em;
 
-    public List<ClientBanque>getAllClients() {
-       Query query = em.createNamedQuery("ClientBanque.findAll");  
-        return query.getResultList(); 
+    private ClientBanque client;
+
+    public SessionBeanClient() {
+    }
+    
+    
+     public SessionBeanClient(EntityManager em, ClientBanque client) {
+        this.em = em;
+        this.client = client;
     }
 
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
-    public ClientBanque updateClient(ClientBanque client) {
-        return em.merge(client);
-    }
-
-    
     public void persist(Object object) {
         em.persist(object);
     }
+
+    public boolean crediterCompte(double montant, Compte compte) {
+       compte.crediter(montant);
+       em.merge(compte);
+        return true;
+    }
     
+    public boolean debiterCompte(double montant, Compte compte) {
+        compte.debiter(montant);
+        em.merge(compte);
+        return true;
+    }
     
+         public List<OperationBancaire> listeOperationCompte(Compte compte){
+             Query query =em.createNamedQuery("OperationBancaire.findAll");
+             return query.getResultList();
+    }
+      
+             
+     public Compte getCompteByid(long idCompte){
+        
+        return  em.find(Compte.class, idCompte);
+    }
+     
+     public List<Compte> listerComptes(){
+         Query query = em.createNamedQuery("Compte.findAll");
+         return query.getResultList();
+     }
+     
+     public List<Compte> listerComptes(ClientBanque clt){
+        
+         return clt.getComptes();
+     }
+
+    public Boolean Transferer(double montant, Compte compteSource, Compte compteDestnation) {
+       compteSource.debiter(montant);
+       compteDestnation.crediter(montant);
+       
+        return true;
+    }
+
+   
+      
+       public boolean modifierCompte(Compte compte){
+          
+           em.merge(compte);
+           return true;
+          
+      }
 }

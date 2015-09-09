@@ -29,7 +29,7 @@
             </div>
             <div id="top-bottom-box">
                 <div id="user-box"></div>                
-                <div id="user-log"><h3>#{loginMBean.client.prenom} #{loginMBean.client.nom}  </h3> <h:form> <p:commandButton value="Se Deconnecter" id="btn_deconnexion" actionListener="#{loginMBean.deconnexion}" ajax="false" /></h:form></div> 
+                <div id="user-log"><h3><ui:insert name="identifier"></ui:insert></h3> <h:form> <p:commandButton value="Se Deconnecter" id="btn_deconnexion" actionListener="#{loginMBean.deconnexion}" ajax="false" /></h:form></div> 
             </div>
             
            <!-- <div id="menuPrincipal">

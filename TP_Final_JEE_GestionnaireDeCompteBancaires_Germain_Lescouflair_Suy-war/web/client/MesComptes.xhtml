@@ -19,6 +19,10 @@
        Mes Comptes
     </ui:define>
 
+     <ui:define name="identifier">
+        #{loginMBean.client.prenom} #{loginMBean.client.nom}  
+    </ui:define>
+    
     <ui:define name="content">
        
            <h:form>
@@ -74,9 +78,8 @@
                             <f:facet name="header">
                                 <h:outputText value="Action"/>
                             </f:facet>
-                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.id)}" value="Details"/>
-                             <h:link class="lien" outcome="#{compteBancaireBeans.getActiontStringModif(item.id)}" value="Modifier"/>
-                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.id)}" value="Depots/Retrait"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.numeroCompte)}" value="Details"/>
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.numeroCompte)}" value="Depots/Retrait"/>
                             
 
                         </p:column>

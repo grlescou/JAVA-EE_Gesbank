@@ -10,15 +10,23 @@ import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteCourant;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteEpargne;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import ht.GermainLescouflairSuy.gesBank.session.receiveJson.ReceiveJsondataGenerate;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+
+import java.io.IOException;
+import java.io.Serializable;
+
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,7 +41,7 @@ public class SessionBeanAdmin implements Serializable{
     @PersistenceContext(unitName = "TP_Final_JEE_GestionnaireDeCompteBancaires_Germain_Lescouflair_Suy-ejbPU")
     private EntityManager em;
 
-
+     ReceiveJsondataGenerate receiveJsondataGenerate;
      public void persist(Object object) {
         em.persist(object);
     }
@@ -82,11 +90,64 @@ public class SessionBeanAdmin implements Serializable{
         c1.getComptes().add(cpt2);
         c1.getComptes().add(cptE1);
         ajouterClient(c1 );
+        
+        
+        ClientBanque c2 = new ClientBanque("004-009-029-3", "Max", "paul", false, champDate(), "max@gmail.com", "1234", champDate(), "max");
+        CompteCourant cpt12 = new CompteCourant (5000,champDate(),15000);
+        CompteCourant cpt22 = new CompteCourant (15000,champDate(),106000);
+        CompteEpargne cptE12 = new CompteEpargne (1000L,champDate(),60000);
+        
+        ajouterCompte(cpt12);
+        ajouterCompte(cpt22);
+        ajouterCompte(cptE12);
+        
+        c2.getComptes().add(cpt12);
+        c2.getComptes().add(cpt22);
+        c2.getComptes().add(cptE12);
+        ajouterClient(c2 );
+        
+        ClientBanque c3 = new ClientBanque("004-009-039-3", "Marc", "Raoul", false, champDate(), "marc@gmail.com", "1234", champDate(), "marc");
+        CompteCourant cpt13 = new CompteCourant (5000,champDate(),50000);
+        CompteCourant cpt23 = new CompteCourant (15000,champDate(),200000);
+        CompteEpargne cptE13 = new CompteEpargne (1000L,champDate(),40000);
+        
+        ajouterCompte(cpt13);
+        ajouterCompte(cpt23);
+        ajouterCompte(cptE13);
+        
+        c3.getComptes().add(cpt13);
+        c3.getComptes().add(cpt23);
+        c3.getComptes().add(cptE13);
+        ajouterClient(c3 );
+        
+        
         //tx.commit();
        
-        Administrateur admin1 = new Administrateur(true,  champDate(), "robert@gmail.com", "1234", champDate(), "admin","Robert", "Richard");
+        Administrateur admin1 = new Administrateur(true,  champDate(), "robert@gmail.com", "1234", champDate(), "admin","Ashley", "Germain");
         
         ajouterAdmin(admin1);
+        receiveJsondataGenerate = new ReceiveJsondataGenerate();
+         try {
+            //ajouterClient(new Client("Richard", "Robert", "004-009-009-3", false, champDate(), "robert@gmail.com", "papa", champDate(), "rrobert") );
+            List<ClientBanque> listClient = null;
+            try {
+                listClient = receiveJsondataGenerate.listUser();
+                System.out.println("receiveJsonData list Size :"+listClient.size());
+            } catch (org.json.simple.parser.ParseException ex) {
+                Logger.getLogger(SessionBeanAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for(ClientBanque c : listClient) {
+                System.out.println(c);
+                ajouterClient(c);
+                
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SessionBeanAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+        
     }
 
     public boolean ajouterCompte(Compte compte){
@@ -150,14 +211,7 @@ public class SessionBeanAdmin implements Serializable{
           
       }
 
-    public void persist1(Object object) {
-        em.persist(object);
-    }
-
-    public void persist2(Object object) {
-        em.persist(object);
-    }
-
+   
    
 
 

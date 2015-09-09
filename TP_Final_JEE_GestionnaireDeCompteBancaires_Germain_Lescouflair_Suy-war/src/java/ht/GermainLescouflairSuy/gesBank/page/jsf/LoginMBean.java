@@ -132,6 +132,14 @@ public class LoginMBean implements Serializable {
     public void setClient(ClientBanque Client) {
         this.client = Client;
     }
+
+    public Administrateur getAdminClient() {
+        return AdminClient;
+    }
+
+    public void setAdminClient(Administrateur AdminClient) {
+        this.AdminClient = AdminClient;
+    }
     
        
     

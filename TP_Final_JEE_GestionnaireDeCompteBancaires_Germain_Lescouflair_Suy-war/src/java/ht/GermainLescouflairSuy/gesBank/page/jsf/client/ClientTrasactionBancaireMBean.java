@@ -129,4 +129,19 @@ public class ClientTrasactionBancaireMBean implements Serializable{
          
         return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
     }
+      
+      
+     public String getActiontString(){
+        
+        return "formulaire1?idcompt=0&amp;btn=Ajouter&amp;canModif=false&amp;faces-redirect=true";
+    }
+    
+    public String getActiontStringModif(long id){
+        
+        return "formulaireModif?idcompt="+id+"&amp;btn=Modifier&amp;canModif=true&amp;faces-redirect=true";
+    }
+      
+      
+      
+      
 }

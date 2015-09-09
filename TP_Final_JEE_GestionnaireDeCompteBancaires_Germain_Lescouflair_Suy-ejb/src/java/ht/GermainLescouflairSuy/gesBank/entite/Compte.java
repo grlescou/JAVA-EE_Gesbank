@@ -50,7 +50,6 @@ public abstract class Compte implements Serializable {
     @Column(nullable=false,length=30)
     private double solde;
     @ManyToOne
-    @JoinColumn(name="OWNER_ID")
     private ClientBanque clientBanque;
 
     @Column(name="TypeCompte")
