@@ -82,6 +82,9 @@ public class AdminMBean {
         return client.getComptes();
     }
     
+    
+    
+    
     public List<OperationBancaire> ListOperationBancaires(Compte compte){
         return compte.getOperations();
     }
