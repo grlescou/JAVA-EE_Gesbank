@@ -29,6 +29,7 @@ public class AdminMBean {
     @EJB
     private SessionBeanAdmin sessionBeanAdmin;
     private ClientBanque client ;
+    private long idClient ;
     
      @EJB
     private SessionBeanClient sessionBeanClient;
@@ -41,11 +42,23 @@ public class AdminMBean {
     @ManagedProperty(value="#{loginMBean}") 
     LoginMBean loginMBean ;
      
+    private List<Compte> listeComptesClient;
+    
     /**
      * Creates a new instance of AdminMBean
      */
     public AdminMBean() {
     }
+
+    public long getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(long idClient) {
+        this.idClient = idClient;
+    }
+    
+    
 
     public ClientBanque getClient() {
         return client;
@@ -75,7 +88,7 @@ public class AdminMBean {
         System.out.println("==================================size de mes comptes :"+listeComptes.size());
     }
     
-    public List<Compte> ListeComptesClient(){
+    public List<Compte> listeComptesClient(){
         
             System.out.println("==================================size de mes comptes :"+client.getComptes().size());
        
@@ -157,13 +170,21 @@ public class AdminMBean {
         return "formulaireModif?idcompt="+id+"&amp;btn=Modifier&amp;canModif=true&amp;faces-redirect=true";
     }
       
-      
+   //============ ajout pour detail  liste des comptes  a partir de list des clients de la banque  
     
-    
-    
-    
-    
-    
+    public void loadListeCompte() {
+        ClientBanque c =(ClientBanque) sessionBeanAdmin.listerClientByid(idClient);
+        
+        listeComptesClient = c.getComptes();
+    }
+
+    public List<Compte> getListeComptesClient() {
+        return listeComptesClient;
+    }
+
+    public void setListeComptesClient(List<Compte> listeComptesClient) {
+        this.listeComptesClient = listeComptesClient;
+    }
     
     
     

@@ -10,6 +10,7 @@ import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteCourant;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteEpargne;
+import ht.GermainLescouflairSuy.gesBank.entite.Utilisateur;
 import ht.GermainLescouflairSuy.gesBank.session.receiveJson.ReceiveJsondataGenerate;
 
 import javax.ejb.LocalBean;
@@ -160,9 +161,15 @@ public class SessionBeanAdmin implements Serializable{
         return em.find(ClientBanque.class, idClient);
         
     }
-    public List<ClientBanque> listerClients(){
+    public List<Utilisateur> listerClients(){
     
        Query query = em.createNamedQuery("Client.findAll");
+       return query.getResultList();
+    }
+    
+    public List<ClientBanque> listerClientsBanque(){
+    
+       Query query = em.createNamedQuery("ClientBanque.findAll");
        return query.getResultList();
     }
     

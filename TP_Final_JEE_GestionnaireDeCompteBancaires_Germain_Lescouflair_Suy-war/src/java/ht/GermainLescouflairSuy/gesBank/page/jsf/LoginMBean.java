@@ -243,9 +243,9 @@ public class LoginMBean implements Serializable {
         DefaultSubMenu secondSubmenu = new DefaultSubMenu("Dynamic Actions");
         
         DefaultMenuItem item3=new DefaultMenuItem("Enregistrer un Compte");
-        item2.setUrl("EnregistrerCompte");
-        item2.setIcon("ui-icon-home");
-        firstSubmenu.addElement(item3);
+        item3.setUrl("EnregistrerCompte");
+        item3.setIcon("ui-icon-home");
+        secondSubmenu.addElement(item3);
         
         item = new DefaultMenuItem("Save");
         item.setIcon("ui-icon-disk");
@@ -274,7 +274,7 @@ public class LoginMBean implements Serializable {
         
          
         //First submenu
-        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
+        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Transactions Bancaires");
          
         DefaultMenuItem item = new DefaultMenuItem("Liste des Comptes");
         item.setUrl("ListeComptes.xhtml");
@@ -292,7 +292,7 @@ public class LoginMBean implements Serializable {
         model.addElement(firstSubmenu);
          
         //Second submenu
-        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Dynamic Actions");
+        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Gestion");
         
         item = new DefaultMenuItem("Nouveau Client");
         item.setUrl("EnregistrerClients.xhtml");
