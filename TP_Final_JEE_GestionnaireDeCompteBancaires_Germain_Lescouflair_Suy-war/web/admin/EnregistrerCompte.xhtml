@@ -23,27 +23,47 @@
 
 
             <h:form>
-                <h1><h:outputText value="Create/Edit"/></h1>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="TypeCompte:" for="typeCompte" />
-                    <h:inputText id="typeCompte" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.typeCompte}" title="TypeCompte" />
-                    <h:outputLabel value="NumeroCompte:" for="numeroCompte" />
-                    <h:inputText id="numeroCompte" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.numeroCompte}" title="NumeroCompte" />
-                    <h:outputLabel value="ClientBanque:" for="clientBanque" />
-                    <h:selectOneMenu id="clientBanque" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.clientBanque.nom} #{clientTrasactionBancaireMBean.selectedcompteBancaire.clientBanque.nom}" title="ClientBanque" >
-                        <!-- TODO: update below reference to list of available items-->
-                        <f:selectItems value="#{fixme}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="Operations:" for="operations" />
-                    <h:inputText id="operations" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.operations}" title="Operations" />
-                    <h:outputLabel value="DateCreation:" for="dateCreation" />
-                    <h:inputText id="dateCreation" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.dateCreation}" title="DateCreation" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="Solde:" for="solde" />
-                    <h:inputText id="solde" value="#{clientTrasactionBancaireMBean.selectedcompteBancaire.solde}" title="Solde" required="true" requiredMessage="The Solde field is required."/>
-                    <h:commandButton id="back" value="Back" action="#{clientTrasactionBancaireMBean}"/>  
-                    <h:commandButton id="update" value="Enregistrer" /> 
+                    <p:outputLabel value="TypeCompte:" for="typeCompte" />
+                   
+                    <p:selectOneMenu  id="typeCompte" value="#{creerCompteMBean.typeCompte}" title="TypeCompte"  effect="fold"   >
+                         <f:selectItem itemValue="CompteC" itemLabel="Courant" />
+                         <f:selectItem itemValue="CompteE" itemLabel="Epargne" />
+                    </p:selectOneMenu>
+                 
+                    <p:outputLabel value="ClientBanque:" for="clientBanque" />
+                    <p:selectOneMenu id="clientBanque" value="#{creerCompteMBean.numeroCompte}" effect="fold" title="Client Banque" converter="#{clientBanqueConverterMBean}"  >
+                        <f:selectItems value="#{creerCompteMBean.selectedItem}"  var="clientBanque" itemLabel="#{clientBanque}"  itemValue="#{clientBanque.value}"/>
+                    </p:selectOneMenu>
+                 
+                    <p:outputLabel value="Solde:" for="solde" />
+                    <p:inputText id="solde" value="#{creerCompteMBean.solde}" title="Solde" required="true" requiredMessage="The Solde field is required."/>
+                    
+                    <p:outputLabel value="Taux:" for="taux" />
+                    <p:selectOneMenu  id="taux" value="#{creerCompteMBean.taux}" title="taux"  effect="fold"   >
+                         <f:selectItem itemValue="0.00" itemLabel="0.00%" />
+                         <f:selectItem itemValue="0.2" itemLabel="0.2%" />
+                          <f:selectItem itemValue="0.25" itemLabel="0.25%" />
+                          <f:selectItem itemValue="0.30" itemLabel="0.30%" />
+                           <f:selectItem itemValue="0.35" itemLabel="0.35%" />
+                    </p:selectOneMenu>
+                    
+                     <p:outputLabel value="Montant Decouvert Autorise" for="mda" />
+                     <p:selectOneMenu  id="mda" value="#{creerCompteMBean.montantDecouvertAutorise}" title="Montant Decouvert Autorise"  effect="fold"   >
+                         <f:selectItem itemValue="0" itemLabel="0" />
+                         <f:selectItem itemValue="10000" itemLabel="10000" />
+                          <f:selectItem itemValue="20000" itemLabel="20000" />
+                           <f:selectItem itemValue="25000" itemLabel="25000" />
+                            <f:selectItem itemValue="50000" itemLabel="50000" />
+                             <f:selectItem itemValue="100000" itemLabel="100000" />
+                              <f:selectItem itemValue="250000" itemLabel="250000" />
+                               <f:selectItem itemValue="350000" itemLabel="350000" />
+                        
+                    </p:selectOneMenu>
+                    
+                    
+                    <p:commandButton id="back" value="Back" />  
+                    <p:commandButton id="update" value="Enregistrer" action="#{creerCompteMBean.creerCompte()}" /> 
                 </h:panelGrid>
             </h:form>
         </f:view>

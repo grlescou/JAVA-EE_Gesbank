@@ -8,7 +8,7 @@ package ht.GermainLescouflairSuy.gesBank.page.jsf;
 import ht.GermainLescouflairSuy.gesBank.entite.Administrateur;
 import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Utilisateur;
-import ht.GermainLescouflairSuy.gesBank.page.jsf.Emumeration.RoleUser;
+import ht.GermainLescouflairSuy.gesBank.entite.enumeration.RoleUser;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanUserLogin;
 import java.io.IOException;
 import java.io.Serializable;

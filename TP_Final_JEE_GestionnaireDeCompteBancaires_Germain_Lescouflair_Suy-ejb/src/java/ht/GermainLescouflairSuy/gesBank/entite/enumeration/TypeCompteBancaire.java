@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ht.GermainLescouflairSuy.gesBank.page.jsf.Emumeration;
+package ht.GermainLescouflairSuy.gesBank.entite.enumeration;
 
 /**
  *
- * @author MyPC
+ * @author lyzzy
  */
-public enum RoleUser {
-    Utilisateur ("Utilisator"), Client("ClientB"), Admin("Administ");
+public enum TypeCompteBancaire {
+
+
+    
+    COURANT("Courant"), EPARGNE("Epargne"), COURANTDB("CompteC"), EPARGNEDB("CompteC");
     
     private String type;
     
-    private  RoleUser(String type){
+    private TypeCompteBancaire(String type){
         this.type = type;
         
     }
     
-    public String getRole(){
+    public String getType(){
         return this.type;
-    }
+    } 
 }

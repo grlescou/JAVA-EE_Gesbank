@@ -8,9 +8,11 @@ package ht.GermainLescouflairSuy.gesBank.page.jsf.admin;
 import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
+import ht.GermainLescouflairSuy.gesBank.entite.enumeration.TypeCompteBancaire;
 import ht.GermainLescouflairSuy.gesBank.page.jsf.LoginMBean;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
@@ -25,7 +27,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean(name = "adminMBean")
 @ViewScoped
-public class AdminMBean {
+public class AdminMBean implements Serializable  {
     @EJB
     private SessionBeanAdmin sessionBeanAdmin;
     private ClientBanque client ;
@@ -34,16 +36,26 @@ public class AdminMBean {
      @EJB
     private SessionBeanClient sessionBeanClient;
     private List<Compte> listeComptes;
-    private Compte compteBancaire;
+   
     private Compte SelectedcompteBancaire;
-    private String btnString ;
+    private String btnString;
     private boolean canModified ;
     private List<Compte> compteBancaireFilter;
     @ManagedProperty(value="#{loginMBean}") 
     LoginMBean loginMBean ;
-     
     private List<Compte> listeComptesClient;
     
+      //====  for creation de compte et de client 
+    
+    private String TypeCompte ;
+    private double Taux ;
+    private double montantDecouvertAutorise;
+    
+    private ClientBanque clientBanque ;
+   private ClientBanque newClientBanque;
+   
+    private Compte compteBancaire;
+    private String verifPass;
     /**
      * Creates a new instance of AdminMBean
      */
@@ -69,9 +81,9 @@ public class AdminMBean {
     }
     
     
-    public void CreerClient(){
-        sessionBeanAdmin.ajouterClient(client);
-    }
+//    public void CreerClient(){
+//        sessionBeanAdmin.ajouterClient(client);
+//    }
     
     public String list() {  
     System.out.println("***LIST***");  
@@ -186,6 +198,97 @@ public class AdminMBean {
         this.listeComptesClient = listeComptesClient;
     }
     
+    
+    
+     //========= partie pour la creation de compte et de client 
+
+    public String getTypeCompte() {
+        return TypeCompte;
+    }
+
+    public void setTypeCompte(String TypeCompte) {
+        this.TypeCompte = TypeCompte;
+    }
+
+    public double getTaux() {
+        return Taux;
+    }
+
+    public void setTaux(double Taux) {
+        this.Taux = Taux;
+    }
+
+    public double getMontantDecouvertAutorise() {
+        return montantDecouvertAutorise;
+    }
+
+    public void setMontantDecouvertAutorise(double montantDecouvertAutorise) {
+        this.montantDecouvertAutorise = montantDecouvertAutorise;
+    }
+
+    public ClientBanque getClientBanque() {
+        return clientBanque;
+    }
+
+    public void setClientBanque(ClientBanque clientBanque) {
+        this.clientBanque = clientBanque;
+    }
+     
+    public void creerCompteBancaire () { 
+        
+        if(this.TypeCompte.equals(TypeCompteBancaire.COURANT.getType())){
+            
+        }
+        
+        
+        if(this.TypeCompte.equals(TypeCompteBancaire.EPARGNE.getType())){
+            
+        }
+        
+        
+    }
+    
+    
+    public void creerClientBanque () {
+        
+        if(newClientBanque.getPassword().equals(verifPass))
+        {
+         sessionBeanAdmin.ajouterClient(newClientBanque);
+        }
+        else{
+            
+        }
+         
+    }
+
+    public ClientBanque getNewClientBanque() {
+        return newClientBanque;
+    }
+
+    public void setNewClientBanque(ClientBanque newClientBanque) {
+        this.newClientBanque = newClientBanque;
+    }
+
+    public Compte getCompteBancaire() {
+        return compteBancaire;
+    }
+
+    public void setCompteBancaire(Compte compteBancaire) {
+        this.compteBancaire = compteBancaire;
+    }
+
+    public String getVerifPass() {
+        return verifPass;
+    }
+
+    public void setVerifPass(String verifPass) {
+        this.verifPass = verifPass;
+    }
+    
+    
+    public void initNewClientBanque(){
+        newClientBanque = new ClientBanque();
+    }
     
     
 }

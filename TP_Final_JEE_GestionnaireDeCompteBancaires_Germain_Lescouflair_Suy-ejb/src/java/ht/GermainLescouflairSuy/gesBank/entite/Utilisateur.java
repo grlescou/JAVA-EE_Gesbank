@@ -174,7 +174,7 @@ public abstract class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "ht.GermainLescouflairSuy.gesBank.entite.Users[ id=" + id + " ]";
+        return "Users[ id=" + id + " ]";
     }
     
 }

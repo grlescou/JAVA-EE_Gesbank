@@ -169,7 +169,7 @@ public abstract class Compte implements Serializable {
 
     @Override
     public String toString() {
-        return "ht.GermainLescouflairSuy.gesBank.entite.Compte[ id=" + numeroCompte + " ]";
+        return "Compte[ id=" + numeroCompte + " ]";
     }
     
 }

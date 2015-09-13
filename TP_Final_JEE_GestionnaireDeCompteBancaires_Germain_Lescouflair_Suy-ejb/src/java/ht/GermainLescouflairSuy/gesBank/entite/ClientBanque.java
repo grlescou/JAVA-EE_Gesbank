@@ -105,6 +105,12 @@ public class ClientBanque extends Utilisateur implements Serializable  {
         this.comptes = comptes;
     }
 
+    @Override
+    public String toString() {
+        //return   nom + " " +prenom;
+        return String.format("%d", this.getId());
+    }
+
     
 
    

@@ -7,6 +7,7 @@ package ht.GermainLescouflairSuy.gesBank.page.jsf;
 
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,7 +21,7 @@ import javax.inject.Named;
  */
 @ManagedBean(name = "transactionBean")
 @ViewScoped
-public class TransactionBean {
+public class TransactionBean implements Serializable {
 
   @EJB
   private SessionBeanClient gestionnaireDeCompteBancaire;

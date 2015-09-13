@@ -7,9 +7,11 @@ package ht.GermainLescouflairSuy.gesBank.page.jsf.admin;
 
 import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
+import ht.GermainLescouflairSuy.gesBank.entite.enumeration.TypeCompteBancaire;
 import ht.GermainLescouflairSuy.gesBank.page.jsf.LoginMBean;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -23,7 +25,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean(name = "listClientMBean")
 @ViewScoped
-public class ListClientMBean {
+public class ListClientMBean implements Serializable {
 
       @EJB
     private SessionBeanAdmin sessionBeanAdmin;
@@ -39,7 +41,9 @@ public class ListClientMBean {
     private List<ClientBanque> ClientBanqueFilter;
    // @ManagedProperty(value="#{loginMBean}") 
    // LoginMBean loginMBean ;
-     
+   
+  
+    
     
     /**
      * Creates a new instance of ListClientMBean
@@ -117,5 +121,6 @@ public class ListClientMBean {
         
         return "transfertClient?idcompt="+id;
     }
+     
     
 }
