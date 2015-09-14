@@ -63,7 +63,7 @@
                     
                     
                     <p:commandButton id="back" value="Back" />  
-                    <p:commandButton id="update" value="Enregistrer" action="#{creerCompteMBean.creerCompte()}" /> 
+                    <p:commandButton id="update" ajax="false"  validateClient="true" value="Enregistrer" action="#{creerCompteMBean.creerCompte()}" /> 
                 </h:panelGrid>
             </h:form>
         </f:view>

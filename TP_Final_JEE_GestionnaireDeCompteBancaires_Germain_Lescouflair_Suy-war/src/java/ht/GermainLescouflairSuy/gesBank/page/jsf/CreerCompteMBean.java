@@ -109,7 +109,7 @@ public class CreerCompteMBean implements Serializable  {
             i++;
         }
         for (Object x : entities) {
-            String n = ((ClientBanque)x).getPrenom() +" "+ ((ClientBanque)x).getPrenom() ;
+            String n = ((ClientBanque)x).getPrenom() +" "+ ((ClientBanque)x).getNom() ;
             items[i++] = new SelectItem( x.toString(), n);
           // SelectItem  it=  new SelectItem(x, x.toString());
            
@@ -177,29 +177,31 @@ public class CreerCompteMBean implements Serializable  {
  
     public void creerCompte(){
         System.out.println("======================="+numeroCompte+"=========================");
-         newClientBanque = sessionBeanAdmin.listerClientByid(Long.getLong(numeroCompte));
-         if(newClientBanque != null){
-        if(this.TypeCompte.equals(TypeCompteBancaire.COURANT.getType())){
-            CompteCourant cc= new CompteCourant ();
-            cc.setClientBanque(newClientBanque);
-            cc.setSolde(solde);
-            cc.setMontantDecouvertAutorise(montantDecouvertAutorise);
-             sessionBeanAdmin.ajouterCompte(cc);
-        }
-        
-        
-        if(this.TypeCompte.equals(TypeCompteBancaire.EPARGNE.getType())){
-            CompteEpargne ce= new CompteEpargne ();
-            ce.setClientBanque(newClientBanque);
-            ce.setSolde(solde);
-            ce.setTaux(Taux);
-             sessionBeanAdmin.ajouterCompte(ce);
-        }
-        
-       
-        
+         newClientBanque = sessionBeanAdmin.listerClientByid(Long.parseLong(numeroCompte));
+         System.out.println("le client trouver est :"+newClientBanque.getNom()+" "+newClientBanque.getPrenom());
+         if(newClientBanque == null){
+             
          }
          else{
+              System.out.println("le type de compte choisi:"+this.TypeCompte);
+             if(this.TypeCompte.equals(TypeCompteBancaire.COURANTDB.getType())){
+                 CompteCourant cc= new CompteCourant ();
+                 cc.setClientBanque(newClientBanque);
+                 cc.setSolde(solde);
+                 cc.setMontantDecouvertAutorise(montantDecouvertAutorise);
+                 sessionBeanAdmin.ajouterCompte(cc);
+             }
+             
+             
+             if(this.TypeCompte.equals(TypeCompteBancaire.EPARGNEDB.getType())){
+                 CompteEpargne ce= new CompteEpargne ();
+                 ce.setClientBanque(newClientBanque);
+                 ce.setSolde(solde);
+                 ce.setTaux(Taux);
+                 sessionBeanAdmin.ajouterCompte(ce);
+             }
+             
+             
              
          }
     }

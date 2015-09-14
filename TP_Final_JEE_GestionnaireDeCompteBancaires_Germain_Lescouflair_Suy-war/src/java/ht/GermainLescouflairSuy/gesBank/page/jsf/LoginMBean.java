@@ -56,7 +56,7 @@ public class LoginMBean implements Serializable {
     private String Role="ClientB" ;
     private String PageRole;
     //ExternalContext context = FacesContext.getCurrentInstance().getExternalContext(); 
-    FacesContext fc = FacesContext.getCurrentInstance();
+    private FacesContext fc = FacesContext.getCurrentInstance();
     ConfigurableNavigationHandler nav;
    //NavigationHandler nh ;
    

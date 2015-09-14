@@ -158,7 +158,7 @@ public class SessionBeanAdmin implements Serializable{
     }
     
     public ClientBanque listerClientByid(long idClient){
-        return (ClientBanque) em.find(Utilisateur.class, idClient);
+        return (ClientBanque) em.find(ClientBanque.class, idClient);
         
     }
     public List<Utilisateur> listerClients(){
