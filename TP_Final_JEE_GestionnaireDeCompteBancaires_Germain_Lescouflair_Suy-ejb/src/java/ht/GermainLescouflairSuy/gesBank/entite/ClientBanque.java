@@ -41,7 +41,7 @@ public class ClientBanque extends Utilisateur implements Serializable  {
     private String nom;
     @Column(nullable=false,length=50)
     private String prenom;
-    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER, mappedBy="ClientBanque")
+    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY, mappedBy="ClientBanque")
     private List<Compte> comptes=new ArrayList<>();
     
     public ClientBanque(){

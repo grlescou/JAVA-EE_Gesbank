@@ -50,7 +50,7 @@
                             <h:outputText value="#{item.numeroCompte}"/>
                         </p:column>
                        
-                        <p:column headerText="Solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{clientTrasactionBancaireMBean.filterByMontant}">
+                        <p:column headerText="solde" filterBy="#{item.solde}" sortBy="#{item.solde}" filterFunction="#{clientTrasactionBancaireMBean.filterByMontant}">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
@@ -58,14 +58,14 @@
                               <f:convertNumber currencySymbol="HTG " type="currency"/>
                            </h:outputText>
                         </p:column>
-                         <p:column headerText="Type Compte" filterBy="#{item.numeroCompte}" sortBy="#{item.numeroCompte}" filterMatchMode="contains" >
+                        <p:column headerText="typeCompte" filterBy="#{item.typeCompte}" sortBy="#{item.typeCompte}" filterMatchMode="contains" width="130">
                             <f:facet name="header">
                                 <h:outputText value="Type Compte"/>
                             </f:facet>
                             
                              <h:outputText value="#{item.discriminatorValue}"/>
                         </p:column>
-                         <p:column headerText="Date Creation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" >
+                         <p:column headerText="dateCreation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" width="130" >
                             <f:facet name="header">
                                 <h:outputText value="Date Creation"/>
                             </f:facet>
@@ -80,16 +80,10 @@
                             </f:facet>
                              <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.numeroCompte)}" value="Details"/>
                              <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.numeroCompte)}" value="Depots/Retrait"/>
-                            
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransfert(item.numeroCompte)}" value="Transfert"/>
 
                         </p:column>
-                        <f:facet name="footer">
-                           <p:commandButton class="lien" value="supprimer"
-                                 oncomplete="PF('DelDialog').show()"
-                                 process="radioDT" update=":DelDetail"
-                                 title="Supprimer"
-                                 image="/resources/img/DeleteRed.png"/> 
-                        </f:facet>
+                     
                     </p:dataTable>
                 </h:form>
             </f:view>
@@ -98,37 +92,7 @@
         
         
         
-        <p:dialog header="Delete Compte" widgetVar="DelDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel id="DelDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty compteBancaireBeans.selectedcompteBancaire}" columnClasses="label,value">
-               <f:facet name="header">
-                   <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
-                </f:facet>
-                
-                <h:outputText value="I:" />
-                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.id}" />
- 
-                <h:outputText value="Nom:" />
-                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.nom}" />
- 
-                <h:outputText value="Solde:" />
-                <h:outputText value="#{compteBancaireBeans.selectedcompteBancaire.solde}" />
-                
-               <p:commandButton class="lien" 
-                                type="submit"
-                                 action="#{compteBancaireBeans.delete(compteBancaireBeans.selectedcompteBancaire)}"
-                                 value="supprimer"
-                                 title="Supprimer"
-                                 image="/resources/img/DeleteRed.png"
-                                 oncomplete="PF('DelDialog').hide(); PF('compteTb').filter();"/>
-
-               
-               
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
- 
- 
+       
 
 
         

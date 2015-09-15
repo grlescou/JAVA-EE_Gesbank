@@ -142,6 +142,9 @@ public class DetailsComptesBeans implements Serializable {
         return "transfertClient?idcompt="+id;
     }
 
-    
+      public String getActiontStringTransfert(long id){
+        
+        return "transferetcompteacompte?idcompt="+id;
+    }
 
 }

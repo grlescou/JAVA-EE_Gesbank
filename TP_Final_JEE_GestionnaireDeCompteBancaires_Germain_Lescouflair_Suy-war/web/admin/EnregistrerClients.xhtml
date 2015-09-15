@@ -17,6 +17,9 @@
     <ui:define name="complementTitreEtH1">
         Nouveau Client
     </ui:define>
+      <ui:define name="identifier">
+        #{loginMBean.adminClient.prenom} #{loginMBean.adminClient.nom}  
+    </ui:define>
 
     <ui:define name="content-title">
         Nouveau client
@@ -43,7 +46,7 @@
                     <p:inputText id="password" value="#{adminMBean.newClientBanque.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
                    <p:outputLabel value="Verifier Password:" for="vpassword" />
                    <p:inputText id="vpassword" value="#{adminMBean.verifPass}" title="Verifier Password"   required="true" requiredMessage="The Password field is required."/>
-                    <p:commandButton id="back" value="Back" />  
+                   
                     <p:commandButton id="update" value="Enregistrer" action="#{adminMBean.creerClientBanque()}" /> 
                 </h:panelGrid>
             </h:form>

@@ -74,9 +74,21 @@ public class SessionBeanClient implements Serializable {
          return clt.getComptes();
      }
 
-    public Boolean Transferer(double montant, Compte compteSource, Compte compteDestnation) {
+    public Boolean transferer(double montant, Compte compteSource, Compte compteDestnation) {
        compteSource.debiter(montant);
-       compteDestnation.crediter(montant);
+       //compteDestnation.crediter(montant);
+       
+        compteSource.debiter(montant);
+         double valeur = compteSource.getSolde();
+        if(valeur==0){
+            return false;
+        }
+        compteDestnation.crediter(montant);
+        modifierCompte(compteSource);
+        modifierCompte(compteDestnation);
+       
+       
+       
        
         return true;
     }
@@ -89,4 +101,16 @@ public class SessionBeanClient implements Serializable {
            return true;
           
       }
+       
+       
+       public boolean supprimerCompte(Compte compte){
+          
+           if(compte.getSolde()> 0.00)
+           {
+              return false ;
+           }else{
+           em.remove(em.merge(compte));
+           return true ;
+           }
+    }
 }

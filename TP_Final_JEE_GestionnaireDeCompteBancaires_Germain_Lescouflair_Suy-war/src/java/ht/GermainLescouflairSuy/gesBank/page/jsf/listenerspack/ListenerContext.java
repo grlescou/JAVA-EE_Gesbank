@@ -28,6 +28,7 @@ public class ListenerContext implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
        System.out.println("Application started....................");
        sessionBeanAdmin.ajouterClientTest();
+       
     }
 
     @Override

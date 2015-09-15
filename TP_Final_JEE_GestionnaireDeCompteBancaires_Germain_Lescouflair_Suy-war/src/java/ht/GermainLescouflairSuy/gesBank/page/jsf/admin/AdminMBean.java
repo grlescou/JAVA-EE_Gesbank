@@ -13,6 +13,7 @@ import ht.GermainLescouflairSuy.gesBank.page.jsf.LoginMBean;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
@@ -37,7 +38,7 @@ public class AdminMBean implements Serializable  {
     private SessionBeanClient sessionBeanClient;
     private List<Compte> listeComptes;
    
-    private Compte SelectedcompteBancaire;
+    private Compte selectedcompteBancaire;
     private String btnString;
     private boolean canModified ;
     private List<Compte> compteBancaireFilter;
@@ -101,10 +102,12 @@ public class AdminMBean implements Serializable  {
     }
     
     public List<Compte> listeComptesClient(){
-        
+        listeComptesClient = null; 
+        loadListeCompte();
             System.out.println("==================================size de mes comptes :"+client.getComptes().size());
        
-        return client.getComptes();
+        //return client.getComptes();
+            return listeComptesClient;
     }
     
     
@@ -127,11 +130,11 @@ public class AdminMBean implements Serializable  {
     }
 
     public Compte getSelectedcompteBancaire() {
-        return SelectedcompteBancaire;
+        return selectedcompteBancaire;
     }
 
     public void setSelectedcompteBancaire(Compte SelectedcompteBancaire) {
-        this.SelectedcompteBancaire = SelectedcompteBancaire;
+        this.selectedcompteBancaire = SelectedcompteBancaire;
     }
 
     public boolean isCanModified() {
@@ -191,6 +194,7 @@ public class AdminMBean implements Serializable  {
     }
 
     public List<Compte> getListeComptesClient() {
+        loadListeCompte();
         return listeComptesClient;
     }
 
@@ -253,6 +257,11 @@ public class AdminMBean implements Serializable  {
         
         if(newClientBanque.getPassword().equals(verifPass))
         {
+            Date d = new Date ();
+            newClientBanque.setCreated(d);
+            newClientBanque.setUpdateAt(d);
+            newClientBanque.setConnected(false);
+            
          sessionBeanAdmin.ajouterClient(newClientBanque);
         }
         else{
@@ -290,5 +299,45 @@ public class AdminMBean implements Serializable  {
         newClientBanque = new ClientBanque();
     }
     
+    //======= suppression =======================
+    
+    
+    public void supprimerCompte (Compte compte){
+        boolean ok = false;
+        if(compte.getSolde() == 0.0){
+             ok =  true ;
+                }
+        if(ok){
+          
+               sessionBeanAdmin.supprimerCompte(compte);
+//               ClientBanque c  = compte.getClientBanque();
+//             for (int i=0; i<c.getComptes().size();i++){
+//                 Compte cpt = c.getComptes().get(i);
+//                 if(cpt.getNumeroCompte().longValue() == compte.getNumeroCompte().longValue()){
+//                     c.getComptes().remove(i);
+//                     sessionBeanAdmin.modifierClient(c);
+//                     break;
+//                 }
+//             }
+             
+            }
+        else {
+            
+        }
+    }
+    
+    
+    public void supprimerClientBanque (ClientBanque client){
+//        boolean ok = false;
+//        if(client.getComptes().isEmpty()){
+//             ok =  true ;
+//                }
+//        if(ok){
+               sessionBeanAdmin.supprimerClient(client);
+//            }
+//        else {
+//            
+//        }
+    }
     
 }

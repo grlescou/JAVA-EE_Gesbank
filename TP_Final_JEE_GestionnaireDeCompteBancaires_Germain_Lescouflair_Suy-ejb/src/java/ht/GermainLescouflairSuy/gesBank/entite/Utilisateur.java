@@ -43,7 +43,7 @@ public abstract class Utilisateur implements Serializable {
     private boolean connected;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date created;
-     @Column(nullable=false,length=20)
+     @Column(nullable=false,length=100)
     private String email;
     @Column(nullable=false,length=30)
     private String password;

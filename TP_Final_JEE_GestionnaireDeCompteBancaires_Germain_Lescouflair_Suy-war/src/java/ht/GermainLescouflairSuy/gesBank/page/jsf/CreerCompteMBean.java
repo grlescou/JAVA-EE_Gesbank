@@ -11,6 +11,7 @@ import ht.GermainLescouflairSuy.gesBank.entite.CompteEpargne;
 import ht.GermainLescouflairSuy.gesBank.entite.enumeration.TypeCompteBancaire;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -189,6 +190,9 @@ public class CreerCompteMBean implements Serializable  {
                  cc.setClientBanque(newClientBanque);
                  cc.setSolde(solde);
                  cc.setMontantDecouvertAutorise(montantDecouvertAutorise);
+                 Date d = new Date();
+                 cc.setDateCreation(d);
+                 
                  sessionBeanAdmin.ajouterCompte(cc);
              }
              
@@ -198,6 +202,8 @@ public class CreerCompteMBean implements Serializable  {
                  ce.setClientBanque(newClientBanque);
                  ce.setSolde(solde);
                  ce.setTaux(Taux);
+                 Date d = new Date();
+                 ce.setDateCreation(d);
                  sessionBeanAdmin.ajouterCompte(ce);
              }
              

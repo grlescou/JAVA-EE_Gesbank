@@ -9,14 +9,13 @@
     <ui:define name="meta-attr">
        <f:attribute name="PageRole" value="ClientB" />
       
-    <f:metadata>
+
+    </ui:define>
+<f:metadata>
         <f:viewParam name="idcompt" value="#{detailsComptesBeans.idCompte}"
                required="true"/>
         <f:viewAction action="#{detailsComptesBeans.loadOperationBancairebyCompte()}"/>
       </f:metadata>   
-       
-    </ui:define>
-
     <ui:define name="complementTitreEtH1">
         Operations Bancaires
     </ui:define>
@@ -25,7 +24,7 @@
         #{loginMBean.client.prenom} #{loginMBean.client.nom}  
     </ui:define>
 
-    <ui:define name="content-title">
+   <ui:define name="content-title">
        Liste des Operations Bancaires du compte Numero : #{detailsComptesBeans.idCompte}
     </ui:define>
 
@@ -87,6 +86,7 @@
             </h:form>
         </f:view>
 
+        
         
         
         

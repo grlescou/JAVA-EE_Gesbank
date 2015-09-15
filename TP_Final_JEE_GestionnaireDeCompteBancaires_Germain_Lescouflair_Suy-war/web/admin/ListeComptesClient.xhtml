@@ -65,14 +65,14 @@
                               <f:convertNumber currencySymbol="HTG " type="currency"/>
                            </h:outputText>
                         </p:column>
-                         <p:column headerText="Type Compte" filterBy="#{item.numeroCompte}" sortBy="#{item.numeroCompte}" filterMatchMode="contains" >
+                        <p:column headerText="Type Compte" filterBy="#{item.typeCompte}" sortBy="#{item.typeCompte}" filterMatchMode="contains" width="130" >
                             <f:facet name="header">
                                 <h:outputText value="Type Compte"/>
                             </f:facet>
                             
                              <h:outputText value="#{item.discriminatorValue}"/>
                         </p:column>
-                         <p:column headerText="Date Creation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" >
+                         <p:column headerText="Date Creation" filterBy="#{item.dateCreation}" sortBy="#{item.dateCreation}" filterMatchMode="contains" width="130">
                             <f:facet name="header">
                                 <h:outputText value="Date Creation"/>
                             </f:facet>
@@ -87,7 +87,7 @@
                             </f:facet>
                              <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringDetail(item.numeroCompte)}" value="Details"/>
                              <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransaction(item.numeroCompte)}" value="Depots/Retrait"/>
-                            
+                             <h:link class="lien" outcome="#{detailsComptesBeans.getActiontStringTransfert(item.numeroCompte)}" value="Transfert"/>
 
                         </p:column>
                         <f:facet name="footer">
@@ -105,25 +105,26 @@
         
         
         
-        <p:dialog header="Delete Compte" widgetVar="DelDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+         <p:dialog header="Delete Compte" widgetVar="DelDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="DelDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty compteBancaireBeans.selectedcompteBancaire}" columnClasses="label,value">
+            <p:panelGrid  columns="2" rendered="#{not empty adminMBean.selectedcompteBancaire}" columnClasses="label,value">
                <f:facet name="header">
                    <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
                 </f:facet>
                 
-                <h:outputText value="I:" />
-                <h:outputText value="#{adminMBean.selectedcompteBancaire.id}" />
+               
+                <h:outputText value="Numero Compte:" />
+                <h:outputText value="#{adminMBean.selectedcompteBancaire.numeroCompte}" />
  
-                <h:outputText value="Nom:" />
-                <h:outputText value="#{adminMBean.selectedcompteBancaire.nom}" />
+                <h:outputText value="Type Compte:" />
+                <h:outputText value="#{adminMBean.selectedcompteBancaire.typeCompte}" />
  
                 <h:outputText value="Solde:" />
                 <h:outputText value="#{adminMBean.selectedcompteBancaire.solde}" />
                 
                <p:commandButton class="lien" 
                                 type="submit"
-                                 action="#{adminMBean.delete(compteBancaireBeans.selectedcompteBancaire)}"
+                                action="#{adminMBean.supprimerCompte(adminMBean.selectedcompteBancaire)}"
                                  value="supprimer"
                                  title="Supprimer"
                                  image="/resources/img/DeleteRed.png"
@@ -134,8 +135,6 @@
             </p:panelGrid>
         </p:outputPanel>
     </p:dialog>
- 
- 
 
 
         

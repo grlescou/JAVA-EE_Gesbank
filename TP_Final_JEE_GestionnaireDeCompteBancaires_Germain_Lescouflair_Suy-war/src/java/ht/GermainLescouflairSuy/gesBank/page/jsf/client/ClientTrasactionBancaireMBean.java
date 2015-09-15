@@ -11,6 +11,7 @@ import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
 import ht.GermainLescouflairSuy.gesBank.entite.Utilisateur;
 import ht.GermainLescouflairSuy.gesBank.page.jsf.LoginMBean;
+import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
 import java.io.Serializable;
 import java.util.List;
@@ -31,7 +32,10 @@ import java.util.Locale;
 @ViewScoped
 public class ClientTrasactionBancaireMBean implements Serializable{
     @EJB
+    private SessionBeanAdmin sessionBeanAdmin;
+    @EJB
     private SessionBeanClient sessionBeanClient;
+    
     private ClientBanque client ;
     private List<Compte> listeComptes;
     private Compte compteBancaire;
@@ -50,7 +54,8 @@ public class ClientTrasactionBancaireMBean implements Serializable{
     }
     
     public void loadClientFromSession(){
-        this.client = loginMBean.getClient();
+        long id = loginMBean.getClient().getId();
+        this.client = sessionBeanAdmin.listerClientByid(id);
         listeComptes = client.getComptes();
         System.out.println("==================================size de mes comptes :"+listeComptes.size());
     }

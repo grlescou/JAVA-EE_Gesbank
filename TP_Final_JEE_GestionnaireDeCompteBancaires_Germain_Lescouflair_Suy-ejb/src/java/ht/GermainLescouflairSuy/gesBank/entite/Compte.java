@@ -159,17 +159,20 @@ public abstract class Compte implements Serializable {
    public void crediter(double montant){
     
         solde+=montant;
-    
+        Date dateOperation = new Date();
+        this.Operations.add(new OperationBancaire (dateOperation,TypeOperation.CREDIT.getType(),montant));
     }
    
     public void debiter(double montant){
     
         solde-=montant;
+          Date dateOperation = new Date();
+        this.Operations.add(new OperationBancaire (dateOperation,TypeOperation.DEBIT.getType(),montant));
     }
 
     @Override
     public String toString() {
-        return "Compte[ id=" + numeroCompte + " ]";
+        return  String.format("%d", numeroCompte) ;
     }
     
 }

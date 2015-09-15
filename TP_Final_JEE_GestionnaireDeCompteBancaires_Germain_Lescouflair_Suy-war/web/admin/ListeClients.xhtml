@@ -13,6 +13,10 @@
     <ui:define name="complementTitreEtH1">
         Liste des Clients
     </ui:define>
+    
+      <ui:define name="identifier">
+        #{loginMBean.adminClient.prenom} #{loginMBean.adminClient.nom}  
+    </ui:define>
 
     <ui:define name="content-title">
         Liste des Clients
@@ -29,7 +33,7 @@
                     <p:dataTable  id="radioDT" value="#{listClientMBean.listeClientBanque}" var="item"  widgetVar="compteTb"
                      paginator="true" rows="10" rowsPerPageTemplate="10,20" sortMode="multiple" emptyMessage="Aucun client Trouve..." 
                      filteredValue="#{listClientMBean.clientBanqueFilter}"
-                     selection="#{adminMBean.selectedcompteBancaire}" rowKey="#{item.id}">
+                     selection="#{listClientMBean.selectedClientBanque}" rowKey="#{item.id}">
                         <f:facet name="header">  
                     <p:outputPanel>  
                         <h:outputText value="Rechercher : " />  
@@ -135,25 +139,25 @@
         
         
         
-        <p:dialog header="Delete Compte" widgetVar="DelDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:dialog header="Delete Client" widgetVar="DelDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="DelDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty compteBancaireBeans.selectedcompteBancaire}" columnClasses="label,value">
+            <p:panelGrid  columns="2" rendered="#{not empty listClientMBean.selectedClientBanque}" columnClasses="label,value">
                <f:facet name="header">
-                   <h2>Voulez vous vraiment supprimer ce compte ?</h2> 
+                   <h2>Voulez vous vraiment supprimer ce Client ?</h2> 
                 </f:facet>
                 
-                <h:outputText value="I:" />
-                <h:outputText value="#{adminMBean.selectedcompteBancaire.id}" />
+                <h:outputText value="Id:" />
+                <h:outputText value="#{listClientMBean.selectedClientBanque.id}" />
  
                 <h:outputText value="Nom:" />
-                <h:outputText value="#{adminMBean.selectedcompteBancaire.nom}" />
+                <h:outputText value="#{listClientMBean.selectedClientBanque.nom}" />
  
-                <h:outputText value="Solde:" />
-                <h:outputText value="#{adminMBean.selectedcompteBancaire.solde}" />
+                <h:outputText value="Prenom:" />
+                <h:outputText value="#{listClientMBean.selectedClientBanque.prenom}" />
                 
                <p:commandButton class="lien" 
                                 type="submit"
-                                 action="#{adminMBean.delete(compteBancaireBeans.selectedcompteBancaire)}"
+                                action="#{adminMBean.supprimerClientBanque(listClientMBean.selectedClientBanque)}"
                                  value="supprimer"
                                  title="Supprimer"
                                  image="/resources/img/DeleteRed.png"

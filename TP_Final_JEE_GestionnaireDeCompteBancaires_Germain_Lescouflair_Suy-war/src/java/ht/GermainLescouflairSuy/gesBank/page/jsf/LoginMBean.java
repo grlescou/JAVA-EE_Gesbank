@@ -224,47 +224,32 @@ public class LoginMBean implements Serializable {
         
          
         //First submenu
-        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
+        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Transactions Bancaires");
          
         DefaultMenuItem item = new DefaultMenuItem("Mes Comptes");
         item.setUrl("MesComptes.xhtml");
         item.setIcon("ui-icon-home");
         firstSubmenu.addElement(item);
-        
+       /* 
         DefaultMenuItem item2=new DefaultMenuItem("Depot/Retrait");
         item2.setUrl("transfertClient.xhtml");
         item2.setIcon("ui-icon-home");
         firstSubmenu.addElement(item2);
-        
+        */
       
         model.addElement(firstSubmenu);
          
         //Second submenu
-        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Dynamic Actions");
+        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Gestion");
         
         DefaultMenuItem item3=new DefaultMenuItem("Enregistrer un Compte");
         item3.setUrl("EnregistrerCompte");
         item3.setIcon("ui-icon-home");
         secondSubmenu.addElement(item3);
         
-        item = new DefaultMenuItem("Save");
-        item.setIcon("ui-icon-disk");
-        item.setCommand("#{menuView.save}");
-        //item.setUpdate("messages");
-        secondSubmenu.addElement(item);
-         
-        item = new DefaultMenuItem("Delete");
-        item.setIcon("ui-icon-close");
-        item.setCommand("#{menuView.delete}");
-        item.setAjax(false);
-        secondSubmenu.addElement(item);
-         
-        item = new DefaultMenuItem("Redirect");
-        item.setIcon("ui-icon-search");
-        item.setCommand("#{menuView.redirect}");
-        secondSubmenu.addElement(item);
+    
  
-        model.addElement(secondSubmenu);
+       // model.addElement(secondSubmenu);
         
         }
         
@@ -285,9 +270,13 @@ public class LoginMBean implements Serializable {
         item2.setUrl("ListeClients.xhtml");
         item2.setIcon("ui-icon-home");
         firstSubmenu.addElement(item2);
-        
+//        
+//         DefaultMenuItem item3 = new DefaultMenuItem("Transfert d'argent");
+//        item3.setUrl("transferetcompteacompte.xhtml");
+//        item3.setIcon("ui-icon-home");
+//        firstSubmenu.addElement(item3);
       
-        
+        //transferetcompteacompte
          
         model.addElement(firstSubmenu);
          
@@ -304,22 +293,7 @@ public class LoginMBean implements Serializable {
         item.setIcon("ui-icon-home");
         secondSubmenu.addElement(item);
  
-        item = new DefaultMenuItem("Save");
-        item.setIcon("ui-icon-disk");
-        item.setCommand("#{menuView.save}");
-        //item.setUpdate("messages");
-        secondSubmenu.addElement(item);
-         
-        item = new DefaultMenuItem("Delete");
-        item.setIcon("ui-icon-close");
-        item.setCommand("#{menuView.delete}");
-        item.setAjax(false);
-        secondSubmenu.addElement(item);
-         
-        item = new DefaultMenuItem("Redirect");
-        item.setIcon("ui-icon-search");
-        item.setCommand("#{menuView.redirect}");
-        secondSubmenu.addElement(item);
+       
  
         model.addElement(secondSubmenu);
         

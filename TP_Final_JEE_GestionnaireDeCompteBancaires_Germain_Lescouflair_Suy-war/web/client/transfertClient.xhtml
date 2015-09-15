@@ -8,7 +8,10 @@
     <ui:define name="meta-attr">
       <f:attribute name="PageRole" value="ClientB" />
     </ui:define>
-
+    <f:metadata>
+            <f:viewParam name="idcompt" value="#{transactionBean.idCompte}"/>
+          <f:viewAction action="#{transactionBean.loadClient()}"/>
+     </f:metadata>
     <ui:define name="identifier">
         #{loginMBean.client.prenom} #{loginMBean.client.nom}  
     </ui:define>    
@@ -25,13 +28,16 @@
           <h:form id="operation" class="classFormCenter" >
             
             <h:panelGrid columns="2" class="classFormMargin">
-              <h:outputLabel value="Id:" for="id" class="classFormMargin" />
-              <h:inputText id="id" class="classFormMargin classField" value="#{transactionBean.compte.id}" 
+              <h:outputLabel value="Numero Compte" for="id" class="classFormMargin" />
+              <h:inputText id="id" class="classFormMargin classField" value="#{transactionBean.compte.numeroCompte}" 
                            title="Id" readonly="true"/>
-              <h:outputLabel value="Nom :" for="nom" class="classFormMargin" />
-              <h:inputText id="nom" class="classFormMargin classField"
-                           value="#{transactionBean.compte.nom}" 
-                           title="Nom" readonly="true"/>
+               <h:outputLabel value="Nom du client" for="nom" class="classFormMargin" />
+               <h:inputText id="nom" class="classFormMargin classField" value="#{transactionBean.clientFullName}" 
+                           title="Nom du client" readonly="true"/>
+               <h:outputLabel value="Type Compte" for="type" class="classFormMargin" />
+              <h:inputText id="type" class="classFormMargin classField"
+                           value="#{transactionBean.compte.typeCompte}" 
+                           title="Type Compte " readonly="true"/>
               <h:outputLabel value="Solde:" for="solde" class="classFormMargin"/>
               <h:inputText id="solde" class="classFormMargin classField" value="#{transactionBean.compte.solde}" 
                            title="Solde" readonly="true"/>
@@ -62,7 +68,5 @@
 
           </h:form>
         </f:view>
-
     </ui:define>
-
 </ui:composition>

@@ -10,7 +10,9 @@ import ht.GermainLescouflairSuy.gesBank.entite.ClientBanque;
 import ht.GermainLescouflairSuy.gesBank.entite.Compte;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteCourant;
 import ht.GermainLescouflairSuy.gesBank.entite.CompteEpargne;
+import ht.GermainLescouflairSuy.gesBank.entite.OperationBancaire;
 import ht.GermainLescouflairSuy.gesBank.entite.Utilisateur;
+import ht.GermainLescouflairSuy.gesBank.entite.enumeration.TypeOperation;
 import ht.GermainLescouflairSuy.gesBank.session.receiveJson.ReceiveJsondataGenerate;
 
 import javax.ejb.LocalBean;
@@ -83,9 +85,9 @@ public class SessionBeanAdmin implements Serializable{
         CompteCourant cpt2 = new CompteCourant (15000,champDate(),100000);
         CompteEpargne cptE1 = new CompteEpargne (1000L,champDate(),100000);
         
-        ajouterCompte(cpt1);
-        ajouterCompte(cpt2);
-        ajouterCompte(cptE1);
+       // ajouterCompte(cpt1);
+       // ajouterCompte(cpt2);
+       // ajouterCompte(cptE1);
         
         c1.getComptes().add(cpt1);
         c1.getComptes().add(cpt2);
@@ -98,9 +100,9 @@ public class SessionBeanAdmin implements Serializable{
         CompteCourant cpt22 = new CompteCourant (15000,champDate(),106000);
         CompteEpargne cptE12 = new CompteEpargne (1000L,champDate(),60000);
         
-        ajouterCompte(cpt12);
-        ajouterCompte(cpt22);
-        ajouterCompte(cptE12);
+       // ajouterCompte(cpt12);
+        //ajouterCompte(cpt22);
+       // ajouterCompte(cptE12);
         
         c2.getComptes().add(cpt12);
         c2.getComptes().add(cpt22);
@@ -112,9 +114,9 @@ public class SessionBeanAdmin implements Serializable{
         CompteCourant cpt23 = new CompteCourant (15000,champDate(),200000);
         CompteEpargne cptE13 = new CompteEpargne (1000L,champDate(),40000);
         
-        ajouterCompte(cpt13);
-        ajouterCompte(cpt23);
-        ajouterCompte(cptE13);
+       // ajouterCompte(cpt13);
+        //ajouterCompte(cpt23);
+       // ajouterCompte(cptE13);
         
         c3.getComptes().add(cpt13);
         c3.getComptes().add(cpt23);
@@ -123,7 +125,9 @@ public class SessionBeanAdmin implements Serializable{
         
         
         //tx.commit();
-       
+            
+        
+
         Administrateur admin1 = new Administrateur(true,  champDate(), "robert@gmail.com", "1234", champDate(), "admin","Ashley", "Germain");
         
         ajouterAdmin(admin1);
@@ -207,19 +211,41 @@ public class SessionBeanAdmin implements Serializable{
       }
        
           public boolean supprimerClient(ClientBanque client){
-          em.remove(client);
+          em.remove(em.merge(client));
           return true;
           
       }
       
        public boolean supprimerCompte(Compte compte){
-          em.remove(compte);
+          em.remove(em.merge(compte));
           return true;
           
       }
 
    
-   
+    public Boolean transferer(double montant, Compte compteSource, Compte compteDestnation) {
+       //compteSource.debiter(montant);
+       //compteDestnation.crediter(montant);
+       
+        compteSource.debiter(montant);
+         double valeur = compteSource.getSolde();
+        if(valeur==0){
+            return false;
+        }
+         Date dateOperation = new Date();
+      
+        compteSource.getOperations(). add(new OperationBancaire (dateOperation,TypeOperation.TRANSFERT.getType()+"-"+TypeOperation.DEBIT.getType(),montant));
+        compteDestnation.crediter(montant);
+        compteDestnation.getOperations(). add(new OperationBancaire (dateOperation,TypeOperation.TRANSFERT.getType()+"-"+TypeOperation.CREDIT.getType(),montant));
+        modifierCompte(compteSource);
+        modifierCompte(compteDestnation);
+       
+       
+       
+       
+        return true;
+    }
+
 
 
 }

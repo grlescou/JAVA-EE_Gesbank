@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../templates/default_template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="meta-attr">
+        <f:attribute name="PageRole" value="Administ" />
+    </ui:define>
+    
+      <f:metadata>
+          <f:viewParam name="idcompt" value="#{tranfertctocMBean.srcId}"/>
+          
+     </f:metadata>
+
+    <ui:define name="complementTitreEtH1">
+        Transfert d'argent
+    </ui:define>
+
+      <ui:define name="identifier">
+        #{loginMBean.adminClient.prenom} #{loginMBean.adminClient.nom}  
+    </ui:define>
+
+    <ui:define name="content-title">
+        Transfert d'argent
+    </ui:define>
+
+    <ui:define name="content">
+       <h:form id="transfert" class="classFormCenter">
+          <h:panelGrid columns="3">
+
+            Numéro du compte source :
+            <h:inputText id="source" class="classFormMargin classField" value="#{tranfertctocMBean.srcId}" 
+                         size="20" required="true"
+                         label="Source" readonly="true" >
+              <f:convertNumber />
+            </h:inputText>
+            <h:message for="source" style="color:red" />
+
+            Numéro du compte destination :
+            <p:selectOneMenu  label="Destination" id="destination" value="#{tranfertctocMBean.dstId}" effect="fold" title="Compte destination"  class="classFormMargin classField" >
+                 <f:selectItems value="#{tranfertctocMBean.selectedItem}"  var="compte" itemLabel="#{compte}"  itemValue="#{compte.value}"/>
+                    </p:selectOneMenu>
+            <h:message for="destination" style="color:red" />
+            
+            Montant du transfert :
+            <h:inputText id="montant" class="classFormMargin classField" value="#{tranfertctocMBean.montantTr}" 
+                         size="20" required="true"
+                         label="Montant" >
+              <f:convertNumber />
+              <h:message for="montant" style="color:red" />
+            </h:inputText>
+            <h:message for="montant" style="color:red" />
+            
+          </h:panelGrid>
+           <h:commandButton class="classBtnBig" action="#{tranfertctocMBean.transfer()}" 
+                           value="Effectuer le transfert"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

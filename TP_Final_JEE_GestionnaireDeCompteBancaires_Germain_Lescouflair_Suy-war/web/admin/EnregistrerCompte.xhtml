@@ -13,6 +13,10 @@
     <ui:define name="complementTitreEtH1">
         Ouvrir un compte
     </ui:define>
+    
+      <ui:define name="identifier">
+        #{loginMBean.adminClient.prenom} #{loginMBean.adminClient.nom}  
+    </ui:define>
 
     <ui:define name="content-title">
         Ouvrir un compte
@@ -62,7 +66,7 @@
                     </p:selectOneMenu>
                     
                     
-                    <p:commandButton id="back" value="Back" />  
+          
                     <p:commandButton id="update" ajax="false"  validateClient="true" value="Enregistrer" action="#{creerCompteMBean.creerCompte()}" /> 
                 </h:panelGrid>
             </h:form>

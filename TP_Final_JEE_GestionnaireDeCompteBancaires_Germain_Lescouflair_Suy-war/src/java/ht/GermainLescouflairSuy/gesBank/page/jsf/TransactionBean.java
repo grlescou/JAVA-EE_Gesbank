@@ -28,7 +28,7 @@ public class TransactionBean implements Serializable {
   private long idCompte;
   private Compte compte;
   private String typeTransac;
-  private int montant;
+  private double montant;
   private String clientFullName="";
 
     /**
@@ -75,11 +75,11 @@ public class TransactionBean implements Serializable {
     }
 
   
-  public int getMontant() {
+  public double getMontant() {
     return montant;
   }
 
-  public void setMontant(int montant) {
+  public void setMontant(double montant) {
     this.montant = montant;
   }
 

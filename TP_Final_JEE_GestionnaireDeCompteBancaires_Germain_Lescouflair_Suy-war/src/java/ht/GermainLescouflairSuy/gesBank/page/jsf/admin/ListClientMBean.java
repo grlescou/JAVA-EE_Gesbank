@@ -35,10 +35,10 @@ public class ListClientMBean implements Serializable {
     private SessionBeanClient sessionBeanClient;
     private List<ClientBanque> listeClientBanque;
     private Compte compteBancaire;
-    private ClientBanque SelectedClientBanque;
+    private ClientBanque selectedClientBanque;
     private String btnString ;
     private boolean canModified ;
-    private List<ClientBanque> ClientBanqueFilter;
+    private List<ClientBanque> clientBanqueFilter;
    // @ManagedProperty(value="#{loginMBean}") 
    // LoginMBean loginMBean ;
    
@@ -77,11 +77,11 @@ public class ListClientMBean implements Serializable {
     }
 
     public ClientBanque getSelectedClientBanque() {
-        return SelectedClientBanque;
+        return selectedClientBanque;
     }
 
     public void setSelectedClientBanque(ClientBanque SelectedClientBanque) {
-        this.SelectedClientBanque = SelectedClientBanque;
+        this.selectedClientBanque = SelectedClientBanque;
     }
 
     public boolean isCanModified() {
@@ -93,11 +93,11 @@ public class ListClientMBean implements Serializable {
     }
 
     public List<ClientBanque> getClientBanqueFilter() {
-        return ClientBanqueFilter;
+        return clientBanqueFilter;
     }
 
     public void setClientBanqueFilter(List<ClientBanque> ClientBanqueFilter) {
-        this.ClientBanqueFilter = ClientBanqueFilter;
+        this.clientBanqueFilter = ClientBanqueFilter;
     }
     
     
