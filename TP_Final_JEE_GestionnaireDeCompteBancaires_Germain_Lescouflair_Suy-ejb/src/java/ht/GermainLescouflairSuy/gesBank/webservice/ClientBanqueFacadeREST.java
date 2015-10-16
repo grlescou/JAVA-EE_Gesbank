@@ -159,7 +159,7 @@ public class ClientBanqueFacadeREST extends AbstractFacade<ClientBanque> {
         msg.setMessage("Inscription reussie avec succes");
         }
         catch(Exception e){
-           msg.setSuccess(true);
+           msg.setSuccess(false);
             msg.setMessage("Impossible de enregistre");  
         }
         
