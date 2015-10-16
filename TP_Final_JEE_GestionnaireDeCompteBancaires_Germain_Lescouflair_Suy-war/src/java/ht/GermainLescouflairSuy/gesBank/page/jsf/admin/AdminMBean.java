@@ -13,6 +13,7 @@ import ht.GermainLescouflairSuy.gesBank.page.jsf.LoginMBean;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanAdmin;
 import ht.GermainLescouflairSuy.gesBank.session.SessionBeanClient;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -190,7 +191,16 @@ public class AdminMBean implements Serializable  {
     public void loadListeCompte() {
         ClientBanque c =(ClientBanque) sessionBeanAdmin.listerClientByid(idClient);
         
-        listeComptesClient = c.getComptes();
+        List<Compte> lsCompt  = new ArrayList<>();
+        
+        for(Compte c1 : c.getComptes())
+        {
+           if(c1.isIsOpen()){
+            lsCompt.add(c1);
+           }
+        }
+        
+        listeComptesClient =lsCompt;
     }
 
     public List<Compte> getListeComptesClient() {
@@ -310,7 +320,7 @@ public class AdminMBean implements Serializable  {
         if(ok){
           
                sessionBeanAdmin.supprimerCompte(compte);
-//               ClientBanque c  = compte.getClientBanque();
+//              ClientBanque c  = compte.getClientBanque();
 //             for (int i=0; i<c.getComptes().size();i++){
 //                 Compte cpt = c.getComptes().get(i);
 //                 if(cpt.getNumeroCompte().longValue() == compte.getNumeroCompte().longValue()){

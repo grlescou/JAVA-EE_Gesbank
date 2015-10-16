@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @DiscriminatorColumn(name="TypeCompte",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("CompteB")
 @NamedQueries({
-    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")})
+    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c WHERE c.isOpen = true"),
+    @NamedQuery(name = "Compte.count", query = "SELECT COUNT(c) FROM Compte c")
+    })
 @XmlRootElement
 public abstract class Compte implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -56,13 +58,17 @@ public abstract class Compte implements Serializable {
     private String typeCompte;
    
     
-    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER,mappedBy="Compte")
+    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER,mappedBy="Compte", orphanRemoval = true)
     private List<OperationBancaire> Operations = new ArrayList<>();
     
+    private boolean isOpen ;
+    
     public Compte() {
+        this.isOpen = true;
     }
 
     public Compte(Long numeroCompte, Date dateCreation, double solde) {
+        this.isOpen = true;
         this.numeroCompte = numeroCompte;
         this.dateCreation = dateCreation;
         this.solde = solde;
@@ -71,6 +77,7 @@ public abstract class Compte implements Serializable {
     }
     
     public Compte(Date dateCreation, double solde) {
+        this.isOpen = true;
         this.dateCreation = dateCreation;
         this.solde = solde;
          Date dateOperation = new Date();
@@ -155,6 +162,16 @@ public abstract class Compte implements Serializable {
     public void setSolde(double solde) {
         this.solde = solde;
     }
+
+    public boolean isIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+    
+    
    
    public void crediter(double montant){
     

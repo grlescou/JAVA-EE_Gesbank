@@ -27,8 +27,20 @@ public class ListenerContext implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
        System.out.println("Application started....................");
+       try{
+              System.out.println("======================TEST CREATE AT START=======================================================================\n\n");
+           
+           if(sessionBeanAdmin.getCountCompte()<=0){
        sessionBeanAdmin.ajouterClientTest();
+       System.out.println("=============== ENTER  --TEST CREATE AT START-- ENTER======================================\n\n");
+       }
+            System.out.println("====================== END --TEST CREATE AT START-- END=======================================================================\n\n");
        
+       }catch(Exception e){
+            System.out.println("=============================================================================================\n\n");
+           System.out.println(e.getMessage());
+              System.out.println("=============================================================================================\n\n");
+       }
     }
 
     @Override

@@ -57,7 +57,7 @@ public class SessionBeanOperationBancaire implements Serializable {
      public List<OperationBancaire> getOperationBancaire(Compte compte) {
         
        
-        return (List<OperationBancaire>)compte.getOperations();
+        return compte.getOperations();
     }
 
 

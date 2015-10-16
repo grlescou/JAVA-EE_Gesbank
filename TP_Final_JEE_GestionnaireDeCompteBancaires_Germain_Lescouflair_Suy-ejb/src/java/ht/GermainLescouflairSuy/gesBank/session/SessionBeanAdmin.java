@@ -28,6 +28,7 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -162,7 +163,7 @@ public class SessionBeanAdmin implements Serializable{
     }
     
     public ClientBanque listerClientByid(long idClient){
-        return (ClientBanque) em.find(ClientBanque.class, idClient);
+        return em.find(ClientBanque.class, idClient);
         
     }
     public List<Utilisateur> listerClients(){
@@ -177,6 +178,10 @@ public class SessionBeanAdmin implements Serializable{
        return query.getResultList();
     }
     
+    public long getCountCompte(){
+          Query query = em.createNamedQuery("Compte.findAll");
+          return query.getResultList().size();
+    }
       public Compte listerCompteByid(long idCompte){
           return em.find(Compte.class, idCompte);
         
@@ -217,7 +222,17 @@ public class SessionBeanAdmin implements Serializable{
       }
       
        public boolean supprimerCompte(Compte compte){
-          em.remove(em.merge(compte));
+          
+           
+           
+           //compte.setClientBanque(null);
+           
+          // compte.setOperations(null);
+          //em.merge(compte);
+           compte.setIsOpen(false);
+           em.merge(compte);
+           
+          // em.remove(em.merge(c));
           return true;
           
       }
