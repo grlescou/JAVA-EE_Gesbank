@@ -129,7 +129,8 @@ public class ClientBanqueFacadeREST extends AbstractFacade<ClientBanque> {
         }
         else{
             auth.setSuccess(success);
-            auth.setMessage("Utilisateur ou mot de passe incorrecte");
+            auth.setClientBanque(null);
+            auth.setMessage("Utilisateur ou mot de passe incorrect");
         }
         
         

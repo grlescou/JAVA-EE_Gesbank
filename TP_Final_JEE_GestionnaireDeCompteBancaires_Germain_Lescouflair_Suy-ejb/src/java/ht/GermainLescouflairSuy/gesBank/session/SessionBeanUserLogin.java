@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -36,7 +37,14 @@ public class SessionBeanUserLogin  implements Serializable{
        Query q  = em.createNamedQuery("Utilisateur.findByUtilisateur",Utilisateur.class);
        q.setParameter("username", utilisateur);
        
-       users =(Utilisateur) q.getSingleResult();
+       try{
+          users =(Utilisateur) q.getSingleResult();
+       }
+       catch (NoResultException ex)
+       {
+           return false;
+       }
+       
        if(users == null){
            return false;
        }
@@ -45,7 +53,7 @@ public class SessionBeanUserLogin  implements Serializable{
                return true;
            }
            else{
-           return false;
+               return false;
            }
        }
        
